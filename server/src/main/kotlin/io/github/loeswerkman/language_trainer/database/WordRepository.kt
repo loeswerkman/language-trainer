@@ -74,7 +74,8 @@ class WordRepository(private val database: Database) {
         this[WordsTable.word] = entry.word.trim()
         this[WordsTable.translation] = entry.translation.trim()
         this[WordsTable.category] = entry.category
-        this[WordsTable.alternatives] = Json.encodeToString(entry.alternatives)
+        this[WordsTable.wordAlternatives] = Json.encodeToString(entry.wordAlternatives)
+        this[WordsTable.translationAlternatives] = Json.encodeToString(entry.translationAlternatives)
         this[WordsTable.tags] = Json.encodeToString(entry.tags)
         this[WordsTable.complexity] = entry.complexity
         this[WordsTable.usefulness] = entry.usefulness
@@ -84,7 +85,8 @@ class WordRepository(private val database: Database) {
     private fun Word.matches(entry: VocabularyEntry): Boolean =
         word == entry.word.trim() &&
             translation == entry.translation.trim() &&
-            alternatives == entry.alternatives &&
+            wordAlternatives == entry.wordAlternatives &&
+            translationAlternatives == entry.translationAlternatives &&
             tags == entry.tags &&
             complexity == entry.complexity &&
             usefulness == entry.usefulness &&
@@ -95,7 +97,8 @@ class WordRepository(private val database: Database) {
         language = this[WordsTable.language],
         word = this[WordsTable.word],
         translation = this[WordsTable.translation],
-        alternatives = Json.decodeFromString(this[WordsTable.alternatives]),
+        wordAlternatives = Json.decodeFromString(this[WordsTable.wordAlternatives]),
+        translationAlternatives = Json.decodeFromString(this[WordsTable.translationAlternatives]),
         category = this[WordsTable.category],
         tags = Json.decodeFromString(this[WordsTable.tags]),
         complexity = this[WordsTable.complexity],

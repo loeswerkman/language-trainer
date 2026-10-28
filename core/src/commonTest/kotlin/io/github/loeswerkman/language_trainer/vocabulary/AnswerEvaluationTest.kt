@@ -12,7 +12,7 @@ class AnswerEvaluationTest {
         language = "russian",
         word = "cat",
         translation = "кошка",
-        alternatives = listOf("кот"),
+        translationAlternatives = listOf("кот"),
         category = WordCategory.NOUN,
         tags = emptyList(),
         complexity = 1,
@@ -36,6 +36,19 @@ class AnswerEvaluationTest {
     @Test
     fun alternativesAreAcceptedFromEnglish() {
         assertEquals(AnswerResult.CORRECT, evaluateAnswer("кот", cat, FROM_ENGLISH))
+        assertEquals(listOf("кошка", "кот"), cat.acceptedAnswers(FROM_ENGLISH))
+        assertEquals(AnswerResult.INCORRECT, evaluateAnswer("кот", cat, TO_ENGLISH))
+    }
+
+    @Test
+    fun alternativesAreAcceptedToEnglish() {
+        val big = cat.copy(word = "big", wordAlternatives = listOf("large"), translation = "большой")
+
+        assertEquals(listOf("big", "large"), big.acceptedAnswers(TO_ENGLISH))
+        assertEquals("big", big.prompt(FROM_ENGLISH))
+        assertEquals(AnswerResult.CORRECT, evaluateAnswer(" LARGE ", big, TO_ENGLISH))
+        assertEquals(AnswerResult.ALMOST_CORRECT, evaluateAnswer("larg", big, TO_ENGLISH))
+        assertEquals(AnswerResult.INCORRECT, evaluateAnswer("large", big, FROM_ENGLISH))
     }
 
     @Test

@@ -11,7 +11,9 @@ object WordsTable : Table("words") {
     val category = enumerationByName<WordCategory>("category", 20)
 
     /** Stored as JSON arrays to keep the schema simple while the model is still evolving. */
-    val alternatives = text("alternatives")
+    val wordAlternatives = text("word_alternatives").default("[]")
+    // Keep the existing column name so stored Russian alternatives are preserved.
+    val translationAlternatives = text("alternatives")
     val tags = text("tags")
 
     val complexity = integer("complexity")

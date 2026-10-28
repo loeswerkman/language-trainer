@@ -2,21 +2,24 @@
 # Loaded into the database when the server starts. Entries must be unique per word + category.
 #
 # Fields:
-#   word          English word (required)
-#   translation   Main Russian translation (required)
-#   category      noun | verb | adjective | adverb | pronoun | preposition |
-#                 conjunction | numeral | interjection | phrase (required)
-#   alternatives  Other accepted translations (optional)
-#   tags          Free-form labels for grouping (optional)
-#   complexity    1 (easy) to 5 (hard) (required)
-#   usefulness    1 (rarely used) to 5 (essential) (required)
-#   notes         Extra explanation shown after answering (optional)
+#   word                     Main English word (required)
+#   wordAlternatives         Other accepted English answers (optional, defaults to [])
+#   translation              Main Russian translation (required)
+#   translationAlternatives  Other accepted Russian answers (optional, defaults to [])
+#   category                 noun | verb | adjective | adverb | pronoun | preposition |
+#                            conjunction | numeral | interjection | phrase (required)
+#   tags                     Free-form labels for grouping (optional)
+#   complexity               1 (easy) to 5 (hard) (required)
+#   usefulness               1 (rarely used) to 5 (essential) (required)
+#   notes                    Extra explanation shown after answering (optional)
 
 - word: "hello"
+  wordAlternatives: ["hi", "hey"]
   translation: "привет"
   category: "interjection"
-  alternatives:
+  translationAlternatives:
     - "здравствуйте" # More formal
+    - "здравствуй" # Greeting to one person addressed informally
   tags:
     - "greeting"
     - "basics"
@@ -25,7 +28,9 @@
   notes: "Привет is informal, used with friends."
 
 - word: "thank you"
+  wordAlternatives: ["thanks"]
   translation: "спасибо"
+  translationAlternatives: ["благодарю"]
   category: "phrase"
   tags:
     - "basics"
@@ -44,7 +49,9 @@
   notes: "Пожалуйста also means \"you're welcome\"."
 
 - word: "yes"
+  wordAlternatives: ["yeah", "yep"]
   translation: "да"
+  translationAlternatives: ["ага"] # Informal
   category: "interjection"
   tags:
     - "basics"
@@ -52,6 +59,7 @@
   usefulness: 5
 
 - word: "no"
+  wordAlternatives: ["nope"]
   translation: "нет"
   category: "interjection"
   tags:
@@ -62,7 +70,7 @@
 - word: "cat"
   translation: "кошка"
   category: "noun"
-  alternatives:
+  translationAlternatives:
     - "кот" # кот is a male cat
   tags:
     - "animal"
@@ -72,7 +80,7 @@
 - word: "dog"
   translation: "собака"
   category: "noun"
-  alternatives:
+  translationAlternatives:
     - "пёс"
   tags:
     - "animal"
@@ -80,6 +88,7 @@
   usefulness: 4
 
 - word: "house"
+  wordAlternatives: ["home"]
   translation: "дом"
   category: "noun"
   tags:
@@ -112,6 +121,7 @@
   usefulness: 4
 
 - word: "to speak"
+  wordAlternatives: ["to talk", "to say"]
   translation: "говорить"
   category: "verb"
   tags:
@@ -121,13 +131,17 @@
   notes: "Говорить also means \"to say\"."
 
 - word: "to live"
+  wordAlternatives: ["to reside"]
   translation: "жить"
+  translationAlternatives: ["проживать"]
   category: "verb"
   complexity: 2
   usefulness: 4
 
 - word: "big"
+  wordAlternatives: ["large"]
   translation: "большой"
+  translationAlternatives: ["крупный"]
   category: "adjective"
   tags:
     - "descriptions"
@@ -135,7 +149,9 @@
   usefulness: 4
 
 - word: "small"
+  wordAlternatives: ["little"]
   translation: "маленький"
+  translationAlternatives: ["небольшой"]
   category: "adjective"
   tags:
     - "descriptions"
@@ -143,6 +159,7 @@
   usefulness: 4
 
 - word: "good"
+  wordAlternatives: ["nice"]
   translation: "хороший"
   category: "adjective"
   tags:
@@ -151,6 +168,7 @@
   usefulness: 5
 
 - word: "well"
+  wordAlternatives: ["fine", "okay"]
   translation: "хорошо"
   category: "adverb"
   complexity: 1
@@ -176,7 +194,7 @@
 - word: "in"
   translation: "в"
   category: "preposition"
-  alternatives:
+  translationAlternatives:
     - "во"
   tags:
     - "basics"

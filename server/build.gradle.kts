@@ -15,6 +15,10 @@ tasks.named<JavaExec>("run") {
     workingDir = rootDir
 }
 
+sourceSets.test {
+    resources.srcDir(rootProject.file("vocabulary"))
+}
+
 dependencies {
     api(project(":core"))
     implementation(libs.logback)

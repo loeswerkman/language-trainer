@@ -16,6 +16,6 @@ fun Word.prompt(direction: TranslationDirection): String = when (direction) {
 
 /** The accepted answers, with the main answer first. */
 fun Word.acceptedAnswers(direction: TranslationDirection): List<String> = when (direction) {
-    TranslationDirection.TO_ENGLISH -> listOf(word)
-    TranslationDirection.FROM_ENGLISH -> listOf(translation) + alternatives
+    TranslationDirection.TO_ENGLISH -> listOf(word) + wordAlternatives
+    TranslationDirection.FROM_ENGLISH -> listOf(translation) + translationAlternatives
 }

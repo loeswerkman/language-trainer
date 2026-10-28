@@ -42,7 +42,9 @@ class ApplicationTest {
         config.vocabularyDir.createDirectories().resolve("russian.yaml").writeText(
             """
             - word: "cat"
+              wordAlternatives: ["feline"]
               translation: "кошка"
+              translationAlternatives: ["кот"]
               category: "noun"
               complexity: 1
               usefulness: 4
@@ -62,6 +64,8 @@ class ApplicationTest {
         assertEquals(HttpStatusCode.OK, response.status)
         val words = Json.decodeFromString<List<Word>>(response.bodyAsText())
         assertEquals(listOf("кошка"), words.map { it.translation })
+        assertEquals(listOf("feline"), words.single().wordAlternatives)
+        assertEquals(listOf("кот"), words.single().translationAlternatives)
         assertEquals("[\"russian\"]", client.get("/api/languages").bodyAsText())
     }
 }
