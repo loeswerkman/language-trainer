@@ -1,4 +1,24 @@
-This is a Kotlin Multiplatform project targeting Web, Server.
+# Welcome to the language trainer!
+
+This repository contains a simple language learning application.
+
+## Project vision
+
+This project has two aims:
+1. To create a simple, free interface for learning languages.
+2. To create a learning ground for fullstack Kotlin programming.
+
+For more information on the initial vision, see [initial-vision.md](docs/initial-vision.md).
+
+## The app
+
+The app features a minimalistic interface for learning languages.
+
+## The code
+
+This is a Kotlin Multiplatform project targeting Web and Server.
+
+### Folder structure
 
 * [/app/shared](./app/shared/src) is for code that will be shared across your Compose Multiplatform
   applications.
@@ -32,14 +52,8 @@ Use the run button in your IDE's editor gutter, or run tests using Gradle tasks:
     - Wasm target: `./gradlew :app:shared:wasmJsTest`
     - JS target: `./gradlew :app:shared:jsTest`
 
----
+### Further technical readings
 
-Learn more
-about [Kotlin Multiplatform](https://www.jetbrains.com/help/kotlin-multiplatform-dev/get-started.html),
-[Compose Multiplatform](https://kotlinlang.org/compose-multiplatform/),
-[Kotlin/Wasm](https://kotl.in/wasm/)…
-
-We would appreciate your feedback on Compose/Web and Kotlin/Wasm in the public Slack
-channel [#compose-web](https://slack-chats.kotlinlang.org/c/compose-web).
-If you face any issues, please report them
-on [YouTrack](https://youtrack.jetbrains.com/newIssue?project=CMP).
+- [Kotlin Multiplatform](https://www.jetbrains.com/help/kotlin-multiplatform-dev/get-started.html)
+- [Compose Multiplatform](https://kotlinlang.org/compose-multiplatform/)
+- [Kotlin/Wasm](https://kotl.in/wasm/)
