@@ -825,3 +825,130 @@
   complexity: 2
   usefulness: 5
   notes: "Time as a general concept; раз means a time or occurrence, as in one time."
+
+- word: "me (accusative)"
+  wordAlternatives: ["me"]
+  translation: "меня"
+  category: "pronoun"
+  tags: ["basics", "pronouns", "accusative"]
+  complexity: 2
+  usefulness: 5
+  notes: "Direct object: он видит меня (he sees me)."
+
+- word: "you (informal, accusative)"
+  wordAlternatives: ["you", "you (informal)"]
+  translation: "тебя"
+  category: "pronoun"
+  tags: ["basics", "pronouns", "accusative"]
+  complexity: 2
+  usefulness: 5
+  notes: "Direct object, addressing one person informally: я вижу тебя (I see you)."
+
+- word: "him (accusative)"
+  wordAlternatives: ["him"]
+  translation: "его"
+  category: "pronoun"
+  tags: ["basics", "pronouns", "accusative"]
+  complexity: 2
+  usefulness: 5
+  notes: "Direct object without a preposition: я вижу его (I see him). After most prepositions, use него."
+
+- word: "her (accusative)"
+  wordAlternatives: ["her"]
+  translation: "её"
+  translationAlternatives: ["ее"]
+  category: "pronoun"
+  tags: ["basics", "pronouns", "accusative"]
+  complexity: 2
+  usefulness: 5
+  notes: "Direct object without a preposition: я вижу её (I see her). After most prepositions, use неё. Ее is the spelling with е in place of ё."
+
+- word: "us (accusative)"
+  wordAlternatives: ["us"]
+  translation: "нас"
+  category: "pronoun"
+  tags: ["basics", "pronouns", "accusative"]
+  complexity: 2
+  usefulness: 5
+  notes: "Direct object: он видит нас (he sees us)."
+
+- word: "you (formal, accusative)"
+  wordAlternatives: ["you", "you (formal)"]
+  translation: "вас"
+  category: "pronoun"
+  tags: ["basics", "pronouns", "accusative"]
+  complexity: 2
+  usefulness: 5
+  notes: "Direct object: я вижу вас (I see you). Used for one person politely or for several people."
+
+- word: "them (accusative)"
+  wordAlternatives: ["them"]
+  translation: "их"
+  category: "pronoun"
+  tags: ["basics", "pronouns", "accusative"]
+  complexity: 2
+  usefulness: 5
+  notes: "Direct object without a preposition: я вижу их (I see them). After most prepositions, use них."
+
+- word: "to me (dative)"
+  wordAlternatives: ["to me"]
+  translation: "мне"
+  category: "pronoun"
+  tags: ["basics", "pronouns", "dative"]
+  complexity: 2
+  usefulness: 5
+  notes: "Recipient: он даёт мне книгу (he gives me a book). Dative has other uses too, as in мне холодно (I am cold)."
+
+- word: "to you (informal, dative)"
+  wordAlternatives: ["to you", "to you (informal)"]
+  translation: "тебе"
+  category: "pronoun"
+  tags: ["basics", "pronouns", "dative"]
+  complexity: 2
+  usefulness: 5
+  notes: "Recipient, addressing one person informally: я даю тебе книгу (I give you a book)."
+
+- word: "to him (dative)"
+  wordAlternatives: ["to him"]
+  translation: "ему"
+  category: "pronoun"
+  tags: ["basics", "pronouns", "dative"]
+  complexity: 2
+  usefulness: 5
+  notes: "Recipient without a preposition: я даю ему книгу (I give him a book). After к, use нему: к нему (towards him)."
+
+- word: "to her (dative)"
+  wordAlternatives: ["to her"]
+  translation: "ей"
+  category: "pronoun"
+  tags: ["basics", "pronouns", "dative"]
+  complexity: 2
+  usefulness: 5
+  notes: "Recipient without a preposition: я даю ей книгу (I give her a book). After к, use ней: к ней (towards her)."
+
+- word: "to us (dative)"
+  wordAlternatives: ["to us"]
+  translation: "нам"
+  category: "pronoun"
+  tags: ["basics", "pronouns", "dative"]
+  complexity: 2
+  usefulness: 5
+  notes: "Recipient: он даёт нам книгу (he gives us a book)."
+
+- word: "to you (formal, dative)"
+  wordAlternatives: ["to you", "to you (formal)"]
+  translation: "вам"
+  category: "pronoun"
+  tags: ["basics", "pronouns", "dative"]
+  complexity: 2
+  usefulness: 5
+  notes: "Recipient: я даю вам книгу (I give you a book). Used for one person politely or for several people."
+
+- word: "to them (dative)"
+  wordAlternatives: ["to them"]
+  translation: "им"
+  category: "pronoun"
+  tags: ["basics", "pronouns", "dative"]
+  complexity: 2
+  usefulness: 5
+  notes: "Recipient without a preposition: я даю им книгу (I give them a book). After к, use ним: к ним (towards them)."
