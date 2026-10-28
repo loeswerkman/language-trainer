@@ -33,6 +33,12 @@ This is a Kotlin Multiplatform project targeting Web and Server.
 
 * [/server](./server/src/main/kotlin) is for the Ktor server application.
 
+* [/vocabulary](./vocabulary) contains the vocabulary, one YAML file per language named after the
+  language (e.g. [vocabulary/russian.yaml](./vocabulary/russian.yaml)). These files are the source of
+  truth: the server loads them into the database on startup and logs duplicates and invalid entries.
+
+* [/docs/adrs](./docs/adrs) contains the architecture decision records.
+
 ### Running the apps
 
 Use the run configurations provided by the run widget in your IDE's toolbar. You can also use these
@@ -43,10 +49,22 @@ commands and options:
     - Wasm target (faster, modern browsers): `./gradlew :app:webApp:wasmJsBrowserDevelopmentRun`
     - JS target (slower, supports older browsers): `./gradlew :app:webApp:jsBrowserDevelopmentRun`
 
+To practise words locally, start the server first and then the web app, and open
+[http://localhost:8081](http://localhost:8081). The web app's dev server forwards `/api` requests to the
+server on port 8080.
+
+Each page has its own URL, e.g. `/russian` for the language page and `/russian/training` for training. The app
+switches pages without reloading, and the dev server serves the app for these URLs so refreshing works.
+
+The server stores its data in a SQLite database at `data/language-trainer.db` (git-ignored). There are no
+migrations yet: after a schema change, delete this file and restart the server to rebuild it from the YAML.
+The paths can be changed with the `DATABASE_FILE` and `VOCABULARY_DIR` environment variables.
+
 ### Running tests
 
 Use the run button in your IDE's editor gutter, or run tests using Gradle tasks:
 
+- Core tests: `./gradlew :core:jvmTest`
 - Server tests: `./gradlew :server:test`
 - Web tests:
     - Wasm target: `./gradlew :app:shared:wasmJsTest`
