@@ -209,3 +209,619 @@
     - "numbers"
   complexity: 1
   usefulness: 4
+
+- word: "two"
+  translation: "два"
+  category: "numeral"
+  tags: ["numbers"]
+  complexity: 1
+  usefulness: 4
+
+- word: "three"
+  translation: "три"
+  category: "numeral"
+  tags: ["numbers"]
+  complexity: 1
+  usefulness: 4
+
+- word: "four"
+  translation: "четыре"
+  category: "numeral"
+  tags: ["numbers"]
+  complexity: 1
+  usefulness: 4
+
+- word: "five"
+  translation: "пять"
+  category: "numeral"
+  tags: ["numbers"]
+  complexity: 1
+  usefulness: 4
+
+- word: "six"
+  translation: "шесть"
+  category: "numeral"
+  tags: ["numbers"]
+  complexity: 1
+  usefulness: 4
+
+- word: "seven"
+  translation: "семь"
+  category: "numeral"
+  tags: ["numbers"]
+  complexity: 1
+  usefulness: 4
+
+- word: "eight"
+  translation: "восемь"
+  category: "numeral"
+  tags: ["numbers"]
+  complexity: 1
+  usefulness: 4
+
+- word: "nine"
+  translation: "девять"
+  category: "numeral"
+  tags: ["numbers"]
+  complexity: 1
+  usefulness: 4
+
+- word: "ten"
+  translation: "десять"
+  category: "numeral"
+  tags: ["numbers"]
+  complexity: 1
+  usefulness: 4
+
+- word: "goodbye"
+  wordAlternatives: ["bye"]
+  translation: "до свидания"
+  translationAlternatives: ["пока"]
+  category: "interjection"
+  tags: ["greeting", "basics"]
+  complexity: 2
+  usefulness: 5
+  notes: "Пока is informal; до свидания is neutral or formal."
+
+- word: "excuse me"
+  translation: "извините"
+  translationAlternatives: ["извини", "простите", "прости"]
+  category: "phrase"
+  tags: ["basics", "politeness"]
+  complexity: 2
+  usefulness: 5
+  notes: "Извините and простите are polite or plural; извини and прости address one person informally."
+
+- word: "I know"
+  translation: "я знаю"
+  category: "phrase"
+  tags: ["basics"]
+  complexity: 2
+  usefulness: 5
+
+- word: "I live"
+  translation: "я живу"
+  category: "phrase"
+  tags: ["basics"]
+  complexity: 2
+  usefulness: 5
+
+- word: "I want"
+  translation: "я хочу"
+  category: "phrase"
+  tags: ["basics"]
+  complexity: 2
+  usefulness: 5
+
+- word: "I eat"
+  translation: "я ем"
+  translationAlternatives: ["я кушаю"]
+  category: "phrase"
+  tags: ["basics", "food and drink"]
+  complexity: 2
+  usefulness: 5
+  notes: "Я ем is neutral; я кушаю is more conversational."
+
+- word: "I work"
+  translation: "я работаю"
+  category: "phrase"
+  tags: ["basics", "work"]
+  complexity: 2
+  usefulness: 5
+
+- word: "why"
+  translation: "почему"
+  category: "adverb"
+  tags: ["questions", "basics"]
+  complexity: 2
+  usefulness: 5
+
+- word: "where"
+  translation: "где"
+  category: "adverb"
+  tags: ["questions", "basics"]
+  complexity: 1
+  usefulness: 5
+  notes: "Где asks about location; куда asks about a destination (where to)."
+
+- word: "what"
+  translation: "что"
+  category: "pronoun"
+  tags: ["questions", "basics"]
+  complexity: 1
+  usefulness: 5
+
+- word: "many"
+  wordAlternatives: ["a lot of"]
+  translation: "много"
+  category: "adverb"
+  tags: ["quantity", "basics"]
+  complexity: 1
+  usefulness: 5
+  notes: "Много is used with the genitive case and can also mean \"much\"."
+
+- word: "very"
+  translation: "очень"
+  category: "adverb"
+  tags: ["basics"]
+  complexity: 1
+  usefulness: 5
+
+- word: "now"
+  translation: "сейчас"
+  translationAlternatives: ["теперь"]
+  category: "adverb"
+  tags: ["time", "basics"]
+  complexity: 2
+  usefulness: 5
+  notes: "Сейчас means at this moment; теперь often contrasts now with how things were before."
+
+- word: "here"
+  translation: "здесь"
+  translationAlternatives: ["тут"]
+  category: "adverb"
+  tags: ["location", "basics"]
+  complexity: 1
+  usefulness: 5
+
+- word: "there"
+  translation: "там"
+  category: "adverb"
+  tags: ["location", "basics"]
+  complexity: 1
+  usefulness: 5
+
+- word: "engineer"
+  translation: "инженер"
+  category: "noun"
+  tags: ["professions", "work"]
+  complexity: 2
+  usefulness: 3
+
+- word: "teacher"
+  translation: "учитель"
+  translationAlternatives: ["учительница", "преподаватель", "преподавательница"]
+  category: "noun"
+  tags: ["professions", "education"]
+  complexity: 2
+  usefulness: 4
+  notes: "Учитель usually means a schoolteacher; преподаватель also covers college or university teaching. Учительница and преподавательница are feminine forms."
+
+- word: "footballer"
+  wordAlternatives: ["football player", "soccer player"]
+  translation: "футболист"
+  translationAlternatives: ["футболистка"]
+  category: "noun"
+  tags: ["professions", "sport"]
+  complexity: 2
+  usefulness: 3
+  notes: "Футбол refers to association football (soccer); футболистка is the feminine form."
+
+- word: "pilot"
+  translation: "пилот"
+  translationAlternatives: ["лётчик", "летчик", "лётчица", "летчица"]
+  category: "noun"
+  tags: ["professions", "transport"]
+  complexity: 2
+  usefulness: 3
+  notes: "Лётчица is the feminine form of лётчик. Russian often writes е instead of ё."
+
+- word: "friend"
+  translation: "друг"
+  translationAlternatives: ["подруга"]
+  category: "noun"
+  tags: ["people"]
+  complexity: 1
+  usefulness: 5
+  notes: "Друг is masculine; подруга is feminine."
+
+- word: "brother"
+  translation: "брат"
+  category: "noun"
+  tags: ["family"]
+  complexity: 1
+  usefulness: 4
+
+- word: "sister"
+  translation: "сестра"
+  category: "noun"
+  tags: ["family"]
+  complexity: 1
+  usefulness: 4
+
+- word: "mother"
+  wordAlternatives: ["mom", "mum"]
+  translation: "мать"
+  translationAlternatives: ["мама"]
+  category: "noun"
+  tags: ["family"]
+  complexity: 1
+  usefulness: 5
+  notes: "Мама is the familiar, everyday form."
+
+- word: "father"
+  wordAlternatives: ["dad"]
+  translation: "отец"
+  translationAlternatives: ["папа"]
+  category: "noun"
+  tags: ["family"]
+  complexity: 1
+  usefulness: 5
+  notes: "Папа is the familiar, everyday form."
+
+- word: "grandpa"
+  wordAlternatives: ["grandfather", "granddad", "grandad"]
+  translation: "дедушка"
+  translationAlternatives: ["дед"]
+  category: "noun"
+  tags: ["family"]
+  complexity: 2
+  usefulness: 4
+
+- word: "grandma"
+  wordAlternatives: ["grandmother", "granny"]
+  translation: "бабушка"
+  category: "noun"
+  tags: ["family"]
+  complexity: 2
+  usefulness: 4
+
+- word: "man"
+  translation: "мужчина"
+  category: "noun"
+  tags: ["people"]
+  complexity: 2
+  usefulness: 5
+  notes: "An adult male; человек means a person or human, not specifically a man."
+
+- word: "woman"
+  translation: "женщина"
+  category: "noun"
+  tags: ["people"]
+  complexity: 2
+  usefulness: 5
+
+- word: "boy"
+  translation: "мальчик"
+  category: "noun"
+  tags: ["people"]
+  complexity: 2
+  usefulness: 4
+
+- word: "girl"
+  translation: "девочка"
+  category: "noun"
+  tags: ["people"]
+  complexity: 2
+  usefulness: 4
+  notes: "Девочка is a child; девушка is a young woman."
+
+- word: "butter"
+  translation: "сливочное масло"
+  translationAlternatives: ["масло"]
+  category: "noun"
+  tags: ["food and drink"]
+  complexity: 2
+  usefulness: 4
+  notes: "Масло alone can mean butter or oil; сливочное масло specifically means butter."
+
+- word: "bread"
+  translation: "хлеб"
+  category: "noun"
+  tags: ["food and drink"]
+  complexity: 1
+  usefulness: 5
+
+- word: "cheese"
+  translation: "сыр"
+  category: "noun"
+  tags: ["food and drink"]
+  complexity: 1
+  usefulness: 4
+
+- word: "meat"
+  translation: "мясо"
+  category: "noun"
+  tags: ["food and drink"]
+  complexity: 1
+  usefulness: 4
+
+- word: "apple"
+  translation: "яблоко"
+  category: "noun"
+  tags: ["food and drink"]
+  complexity: 1
+  usefulness: 4
+
+- word: "tea"
+  translation: "чай"
+  category: "noun"
+  tags: ["food and drink"]
+  complexity: 1
+  usefulness: 5
+
+- word: "teahouse"
+  wordAlternatives: ["tea house"]
+  translation: "чайхана"
+  translationAlternatives: ["чайная"]
+  category: "noun"
+  tags: ["places", "food and drink"]
+  complexity: 3
+  usefulness: 2
+  notes: "Чайхана is a Central Asian-style teahouse; чайная is a general tea room."
+
+- word: "to rest"
+  wordAlternatives: ["to relax"]
+  translation: "отдыхать"
+  category: "verb"
+  tags: ["activities"]
+  complexity: 2
+  usefulness: 4
+
+- word: "to walk"
+  wordAlternatives: ["to go for a walk", "to stroll"]
+  translation: "гулять"
+  translationAlternatives: ["прогуливаться"]
+  category: "verb"
+  tags: ["activities"]
+  complexity: 2
+  usefulness: 4
+  notes: "Here, walking for leisure. Идти and ходить describe going on foot."
+
+- word: "to think"
+  translation: "думать"
+  translationAlternatives: ["мыслить"]
+  category: "verb"
+  tags: ["activities"]
+  complexity: 2
+  usefulness: 5
+
+- word: "to do"
+  wordAlternatives: ["to make", "to do/make"]
+  translation: "делать"
+  category: "verb"
+  tags: ["activities", "basics"]
+  complexity: 2
+  usefulness: 5
+  notes: "Делать covers both doing and making; specific activities may use other verbs."
+
+- word: "to study"
+  translation: "учиться"
+  translationAlternatives: ["изучать", "учить"]
+  category: "verb"
+  tags: ["activities", "education"]
+  complexity: 2
+  usefulness: 5
+  notes: "Учиться means to study or be a student; изучать takes a subject or topic; учить can mean to learn material or to teach."
+
+- word: "to have breakfast"
+  wordAlternatives: ["to eat breakfast"]
+  translation: "завтракать"
+  category: "verb"
+  tags: ["activities", "food and drink"]
+  complexity: 2
+  usefulness: 4
+
+- word: "to have lunch"
+  wordAlternatives: ["to eat lunch"]
+  translation: "обедать"
+  category: "verb"
+  tags: ["activities", "food and drink"]
+  complexity: 2
+  usefulness: 4
+
+- word: "to have dinner"
+  wordAlternatives: ["to eat dinner", "to have supper", "to eat supper"]
+  translation: "ужинать"
+  category: "verb"
+  tags: ["activities", "food and drink"]
+  complexity: 2
+  usefulness: 4
+  notes: "The evening meal. Обедать refers to having the midday meal."
+
+- word: "university teacher"
+  wordAlternatives: ["university lecturer"]
+  translation: "преподаватель университета"
+  translationAlternatives: ["университетский преподаватель", "преподавательница университета"]
+  category: "noun"
+  tags: ["professions", "education"]
+  complexity: 3
+  usefulness: 3
+  notes: "Преподаватель is also sufficient when the university context is clear. Профессор is a specific academic title."
+
+- word: "message"
+  translation: "сообщение"
+  category: "noun"
+  tags: ["communication"]
+  complexity: 2
+  usefulness: 5
+
+- word: "kids"
+  wordAlternatives: ["children"]
+  translation: "дети"
+  translationAlternatives: ["ребята"]
+  category: "noun"
+  tags: ["people", "family"]
+  complexity: 1
+  usefulness: 5
+  notes: "Дети is the plural of ребёнок (child). Ребята is informal and can also mean guys."
+
+- word: "young"
+  translation: "молодой"
+  category: "adjective"
+  tags: ["descriptions"]
+  complexity: 2
+  usefulness: 4
+  notes: "Masculine dictionary form; feminine молодая, neuter молодое, plural молодые."
+
+- word: "dinner"
+  wordAlternatives: ["supper"]
+  translation: "ужин"
+  category: "noun"
+  tags: ["food and drink"]
+  complexity: 1
+  usefulness: 4
+  notes: "Here, the evening meal. Обед is the midday meal, which can also be called dinner in some varieties of English."
+
+- word: "sandwich"
+  translation: "бутерброд"
+  translationAlternatives: ["сэндвич", "сендвич"]
+  category: "noun"
+  tags: ["food and drink"]
+  complexity: 2
+  usefulness: 4
+  notes: "Бутерброд is often open-faced; сэндвич usually has two slices of bread."
+
+- word: "magazine"
+  translation: "журнал"
+  category: "noun"
+  tags: ["objects", "reading"]
+  complexity: 2
+  usefulness: 3
+  notes: "Магазин means shop, not magazine."
+
+- word: "shop"
+  wordAlternatives: ["store"]
+  translation: "магазин"
+  category: "noun"
+  tags: ["places", "shopping"]
+  complexity: 2
+  usefulness: 5
+
+- word: "hockey"
+  wordAlternatives: ["ice hockey"]
+  translation: "хоккей"
+  translationAlternatives: ["хоккей с шайбой"]
+  category: "noun"
+  tags: ["sport"]
+  complexity: 2
+  usefulness: 3
+  notes: "Хоккей usually means ice hockey; field hockey is хоккей на траве."
+
+- word: "jazz"
+  translation: "джаз"
+  category: "noun"
+  tags: ["music"]
+  complexity: 1
+  usefulness: 3
+
+- word: "rock"
+  wordAlternatives: ["rock music"]
+  translation: "рок"
+  translationAlternatives: ["рок-музыка"]
+  category: "noun"
+  tags: ["music"]
+  complexity: 1
+  usefulness: 3
+  notes: "The music genre, not a stone."
+
+- word: "well done"
+  wordAlternatives: ["good job", "nice work"]
+  translation: "молодец"
+  translationAlternatives: ["молодцы", "отлично", "так держать"]
+  category: "phrase"
+  tags: ["communication", "basics"]
+  complexity: 2
+  usefulness: 4
+  notes: "Praise, not a way of cooking meat. Молодец addresses one person; молодцы addresses several."
+
+- word: "to cook"
+  translation: "готовить"
+  translationAlternatives: ["готовить еду"]
+  category: "verb"
+  tags: ["activities", "food and drink"]
+  complexity: 2
+  usefulness: 4
+  notes: "Готовить can also mean to prepare; готовить еду explicitly means to cook food."
+
+- word: "example"
+  translation: "пример"
+  category: "noun"
+  tags: ["education"]
+  complexity: 2
+  usefulness: 4
+
+- word: "dictionary"
+  translation: "словарь"
+  category: "noun"
+  tags: ["education", "objects"]
+  complexity: 2
+  usefulness: 4
+
+- word: "uncle"
+  translation: "дядя"
+  category: "noun"
+  tags: ["family"]
+  complexity: 1
+  usefulness: 3
+
+- word: "aunt"
+  wordAlternatives: ["auntie", "aunty"]
+  translation: "тётя"
+  translationAlternatives: ["тетя"]
+  category: "noun"
+  tags: ["family"]
+  complexity: 1
+  usefulness: 3
+  notes: "Тетя is the common spelling with е in place of ё."
+
+- word: "maybe"
+  wordAlternatives: ["perhaps"]
+  translation: "может быть"
+  translationAlternatives: ["возможно", "может"]
+  category: "adverb"
+  tags: ["basics"]
+  complexity: 2
+  usefulness: 5
+
+- word: "soon"
+  translation: "скоро"
+  category: "adverb"
+  tags: ["time"]
+  complexity: 1
+  usefulness: 4
+
+- word: "earlier"
+  translation: "раньше"
+  translationAlternatives: ["ранее"]
+  category: "adverb"
+  tags: ["time"]
+  complexity: 2
+  usefulness: 4
+
+- word: "later"
+  translation: "позже"
+  translationAlternatives: ["позднее", "потом"]
+  category: "adverb"
+  tags: ["time"]
+  complexity: 2
+  usefulness: 4
+  notes: "Позже and позднее mean later; потом means later or then in a sequence."
+
+- word: "time"
+  translation: "время"
+  category: "noun"
+  tags: ["time", "basics"]
+  complexity: 2
+  usefulness: 5
+  notes: "Time as a general concept; раз means a time or occurrence, as in one time."
