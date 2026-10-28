@@ -1,0 +1,193 @@
+# Russian vocabulary: the source of truth for the words in the app.
+# Loaded into the database when the server starts. Entries must be unique per word + category.
+#
+# Fields:
+#   word          English word (required)
+#   translation   Main Russian translation (required)
+#   category      noun | verb | adjective | adverb | pronoun | preposition |
+#                 conjunction | numeral | interjection | phrase (required)
+#   alternatives  Other accepted translations (optional)
+#   tags          Free-form labels for grouping (optional)
+#   complexity    1 (easy) to 5 (hard) (required)
+#   usefulness    1 (rarely used) to 5 (essential) (required)
+#   notes         Extra explanation shown after answering (optional)
+
+- word: "hello"
+  translation: "привет"
+  category: "interjection"
+  alternatives:
+    - "здравствуйте" # More formal
+  tags:
+    - "greeting"
+    - "basics"
+  complexity: 1
+  usefulness: 5
+  notes: "Привет is informal, used with friends."
+
+- word: "thank you"
+  translation: "спасибо"
+  category: "phrase"
+  tags:
+    - "basics"
+    - "politeness"
+  complexity: 1
+  usefulness: 5
+
+- word: "please"
+  translation: "пожалуйста"
+  category: "adverb"
+  tags:
+    - "basics"
+    - "politeness"
+  complexity: 2
+  usefulness: 5
+  notes: "Пожалуйста also means \"you're welcome\"."
+
+- word: "yes"
+  translation: "да"
+  category: "interjection"
+  tags:
+    - "basics"
+  complexity: 1
+  usefulness: 5
+
+- word: "no"
+  translation: "нет"
+  category: "interjection"
+  tags:
+    - "basics"
+  complexity: 1
+  usefulness: 5
+
+- word: "cat"
+  translation: "кошка"
+  category: "noun"
+  alternatives:
+    - "кот" # кот is a male cat
+  tags:
+    - "animal"
+  complexity: 1
+  usefulness: 4
+
+- word: "dog"
+  translation: "собака"
+  category: "noun"
+  alternatives:
+    - "пёс"
+  tags:
+    - "animal"
+  complexity: 1
+  usefulness: 4
+
+- word: "house"
+  translation: "дом"
+  category: "noun"
+  tags:
+    - "home"
+  complexity: 1
+  usefulness: 5
+
+- word: "water"
+  translation: "вода"
+  category: "noun"
+  tags:
+    - "food and drink"
+  complexity: 1
+  usefulness: 5
+
+- word: "book"
+  translation: "книга"
+  category: "noun"
+  tags:
+    - "objects"
+  complexity: 1
+  usefulness: 4
+
+- word: "to read"
+  translation: "читать"
+  category: "verb"
+  tags:
+    - "activities"
+  complexity: 2
+  usefulness: 4
+
+- word: "to speak"
+  translation: "говорить"
+  category: "verb"
+  tags:
+    - "communication"
+  complexity: 2
+  usefulness: 5
+  notes: "Говорить also means \"to say\"."
+
+- word: "to live"
+  translation: "жить"
+  category: "verb"
+  complexity: 2
+  usefulness: 4
+
+- word: "big"
+  translation: "большой"
+  category: "adjective"
+  tags:
+    - "descriptions"
+  complexity: 2
+  usefulness: 4
+
+- word: "small"
+  translation: "маленький"
+  category: "adjective"
+  tags:
+    - "descriptions"
+  complexity: 2
+  usefulness: 4
+
+- word: "good"
+  translation: "хороший"
+  category: "adjective"
+  tags:
+    - "descriptions"
+  complexity: 2
+  usefulness: 5
+
+- word: "well"
+  translation: "хорошо"
+  category: "adverb"
+  complexity: 1
+  usefulness: 5
+  notes: "Хорошо also means \"okay\"."
+
+- word: "I"
+  translation: "я"
+  category: "pronoun"
+  tags:
+    - "basics"
+  complexity: 1
+  usefulness: 5
+
+- word: "and"
+  translation: "и"
+  category: "conjunction"
+  tags:
+    - "basics"
+  complexity: 1
+  usefulness: 5
+
+- word: "in"
+  translation: "в"
+  category: "preposition"
+  alternatives:
+    - "во"
+  tags:
+    - "basics"
+  complexity: 2
+  usefulness: 5
+  notes: "Во is used before some consonant clusters, e.g. во Франции."
+
+- word: "one"
+  translation: "один"
+  category: "numeral"
+  tags:
+    - "numbers"
+  complexity: 1
+  usefulness: 4
