@@ -8,19 +8,23 @@ import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertFailsWith
 import kotlin.test.assertFalse
+import kotlin.test.assertNull
 import kotlin.test.assertTrue
 
 class FlashcardSessionTest {
 
-    private val words = listOf(word(1, "cat", "кошка"), word(2, "dog", "собака"))
-    private val keepOrder: Shuffle = { it }
+    private val cat = word(1, "cat", "кошка")
+    private val dog = word(2, "dog", "собака")
+    private val bird = word(3, "bird", "птица")
+    private val words = listOf(cat, dog)
 
     @Test
-    fun countsCorrectAnswers() {
-        val first = FlashcardSession.start(words, shuffle = keepOrder).submit("cat")
+    fun countsCorrectAnswersInTheGivenOrder() {
+        val first = FlashcardSession.start(words).submit("cat")
         assertEquals(AnswerResult.CORRECT, first.lastResult)
 
-        val second = first.next(keepOrder).submit("cat")
+        val second = first.next().submit("cat")
+        assertEquals(dog, second.currentWord)
         assertEquals(AnswerResult.INCORRECT, second.lastResult)
         assertEquals(1, second.correctCount)
         assertTrue(second.isRoundFinished)
@@ -28,27 +32,50 @@ class FlashcardSessionTest {
 
     @Test
     fun canPractiseFromEnglish() {
-        val session = FlashcardSession.start(words, TranslationDirection.FROM_ENGLISH, keepOrder).submit("кошка")
+        val session = FlashcardSession.start(words, TranslationDirection.FROM_ENGLISH).submit("кошка")
         assertEquals(AnswerResult.CORRECT, session.lastResult)
     }
 
     @Test
-    fun startsNewRoundAfterLastCard() {
-        val session = FlashcardSession.start(words, shuffle = keepOrder)
-            .submit("cat").next(keepOrder)
-            .submit("dog").next(keepOrder)
-
-        assertEquals(0, session.position)
-        assertEquals(0, session.correctCount)
-        assertFalse(session.isAnswered)
+    fun cannotSkipAnswerTwiceOrGoPastTheEnd() {
+        val session = FlashcardSession.start(words)
+        assertFailsWith<IllegalStateException> { session.next() }
+        val answered = session.submit("cat")
+        assertFailsWith<IllegalStateException> { answered.submit("cat") }
+        assertFailsWith<IllegalStateException> { answered.next().submit("dog").next() }
     }
 
     @Test
-    fun cannotSkipOrAnswerTwice() {
-        val session = FlashcardSession.start(words, shuffle = keepOrder)
-        assertFailsWith<IllegalStateException> { session.next(keepOrder) }
-        val answered = session.submit("cat")
-        assertFailsWith<IllegalStateException> { answered.submit("cat") }
+    fun replacesTheUpcomingCardsButKeepsAnsweredOnes() {
+        val session = FlashcardSession.start(listOf(cat, dog, bird)).submit("cat").next()
+
+        val changed = session.withRemaining(listOf(bird, cat))!!
+
+        assertEquals(1, changed.position)
+        assertEquals(bird, changed.currentWord)
+        assertEquals(2, changed.size)
+        assertEquals(1, changed.correctCount)
+    }
+
+    @Test
+    fun keepsTheAnsweredCurrentCardAndItsFeedback() {
+        val session = FlashcardSession.start(listOf(cat, dog)).submit("cat")
+
+        val changed = session.withRemaining(listOf(bird))!!
+
+        assertEquals(cat, changed.currentWord)
+        assertEquals(AnswerResult.CORRECT, changed.lastResult)
+        assertEquals(bird, changed.next().currentWord)
+
+        val finished = session.withRemaining(listOf(cat))!!
+        assertTrue(finished.isRoundFinished)
+    }
+
+    @Test
+    fun returnsNullWhenNoUnansweredCardIsLeft() {
+        val session = FlashcardSession.start(listOf(cat, dog)).submit("cat").next()
+        assertNull(session.withRemaining(listOf(cat)))
+        assertFalse(session.withRemaining(listOf(dog))!!.isAnswered)
     }
 
     private fun word(id: Long, word: String, translation: String) = Word(

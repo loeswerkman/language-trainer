@@ -51,7 +51,7 @@ fun App() {
             Box(modifier = Modifier.safeContentPadding().fillMaxSize().padding(24.dp)) {
                 Breadcrumbs(route, onNavigate = navigate, modifier = Modifier.align(Alignment.TopStart))
                 Column(
-                    modifier = Modifier.align(Alignment.Center).padding(top = 32.dp).widthIn(max = 560.dp).fillMaxWidth(),
+                    modifier = Modifier.align(Alignment.Center).padding(top = 32.dp).widthIn(max = maxContentWidth(route)).fillMaxWidth(),
                     horizontalAlignment = Alignment.CenterHorizontally,
                     verticalArrangement = Arrangement.spacedBy(16.dp),
                 ) {
@@ -68,4 +68,11 @@ fun App() {
             }
         }
     }
+}
+
+/** Tables need more room than the other screens. */
+private fun maxContentWidth(route: Route) = when (route) {
+    is Route.Vocabulary -> 1280.dp
+    is Route.Training -> 720.dp
+    else -> 560.dp
 }

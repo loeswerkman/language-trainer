@@ -28,25 +28,22 @@ import io.github.loeswerkman.language_trainer.vocabulary.AnswerResult
 import io.github.loeswerkman.language_trainer.vocabulary.TranslationDirection
 import io.github.loeswerkman.language_trainer.vocabulary.acceptedAnswers
 import io.github.loeswerkman.language_trainer.vocabulary.prompt
-import io.github.loeswerkman.language_trainer.vocabulary.Word
 
+/**
+ * Shows the current card of [session]. [onSubmit] checks the typed answer; [onNext] moves on, or starts a new round
+ * when the round is finished.
+ */
 @Composable
-fun FlashcardScreen(words: List<Word>, onAnswered: (Word, TranslationDirection, String) -> Unit = { _, _, _ -> }) {
-    var session by remember(words) { mutableStateOf(FlashcardSession.start(words)) }
-    var answer by remember { mutableStateOf("") }
+fun FlashcardScreen(session: FlashcardSession, onSubmit: (String) -> Unit, onNext: () -> Unit) {
+    // Cleared whenever another card is shown, also when a new filter changes the upcoming cards.
+    var answer by remember(session.position, session.currentWord.id) { mutableStateOf("") }
     val focusRequester = remember { FocusRequester() }
 
     fun submitOrContinue() {
-        if (session.isAnswered) {
-            session = session.next()
-            answer = ""
-        } else {
-            onAnswered(session.currentWord, session.direction, answer)
-            session = session.submit(answer)
-        }
+        if (session.isAnswered) onNext() else onSubmit(answer)
     }
 
-    LaunchedEffect(session.position) { focusRequester.requestFocus() }
+    LaunchedEffect(session.position, session.currentWord.id) { focusRequester.requestFocus() }
 
     val word = session.currentWord
     Text(

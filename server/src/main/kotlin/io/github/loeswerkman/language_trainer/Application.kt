@@ -54,7 +54,7 @@ fun Application.module(config: AppConfig = AppConfig.fromEnvironment()) {
         get("/api/vocabulary") {
             val language = call.request.queryParameters["language"]
                 ?: return@get call.respond(HttpStatusCode.BadRequest, "The language parameter is required")
-            call.respond(training.vocabularyStatistics(language))
+            call.respond(training.vocabulary(language))
         }
         post("/api/sessions") {
             val request = call.receive<StartSessionRequest>()

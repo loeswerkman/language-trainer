@@ -5,14 +5,12 @@ import io.github.loeswerkman.language_trainer.vocabulary.TranslationDirection
 import io.github.loeswerkman.language_trainer.vocabulary.Word
 import io.github.loeswerkman.language_trainer.vocabulary.evaluateAnswer
 
-typealias Shuffle = (List<Word>) -> List<Word>
-
-private val randomShuffle: Shuffle = { it.shuffled() }
-
-/** Immutable state of a round of flashcards. Every action returns a new session. */
+/**
+ * Immutable state of a round of flashcards, shown in the given order. Every action returns a new session.
+ * Starting the next round is up to the caller, so it can pick (and order) the words again.
+ */
 @ConsistentCopyVisibility
 data class FlashcardSession private constructor(
-    private val words: List<Word>,
     private val round: List<Word>,
     val direction: TranslationDirection,
     val position: Int = 0,
@@ -33,20 +31,28 @@ data class FlashcardSession private constructor(
         )
     }
 
-    /** Moves to the next card, or starts a new shuffled round after the last card. */
-    fun next(shuffle: Shuffle = randomShuffle): FlashcardSession {
+    fun next(): FlashcardSession {
         check(isAnswered) { "Answer the current card first" }
-        return if (isRoundFinished) start(words, direction, shuffle) else copy(position = position + 1, lastResult = null)
+        check(!isRoundFinished) { "The round is finished; start a new one" }
+        return copy(position = position + 1, lastResult = null)
+    }
+
+    /**
+     * Replaces the cards still to come with [words], skipping words already answered in this round.
+     * An answered current card stays, so its feedback remains visible. Returns null if no cards would be left to show.
+     */
+    fun withRemaining(words: List<Word>): FlashcardSession? {
+        val done = round.take(if (isAnswered) position + 1 else position)
+        val doneIds = done.map { it.id }.toSet()
+        val rest = words.filter { it.id !in doneIds }
+        if (!isAnswered && rest.isEmpty()) return null
+        return copy(round = done + rest)
     }
 
     companion object {
-        fun start(
-            words: List<Word>,
-            direction: TranslationDirection = TranslationDirection.TO_ENGLISH,
-            shuffle: Shuffle = randomShuffle,
-        ): FlashcardSession {
+        fun start(words: List<Word>, direction: TranslationDirection = TranslationDirection.TO_ENGLISH): FlashcardSession {
             require(words.isNotEmpty()) { "A session needs at least one word" }
-            return FlashcardSession(words, shuffle(words), direction)
+            return FlashcardSession(words, direction)
         }
     }
 }

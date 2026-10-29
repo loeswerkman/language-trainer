@@ -5,6 +5,7 @@ import io.github.loeswerkman.language_trainer.vocabulary.AnswerResult
 import io.github.loeswerkman.language_trainer.vocabulary.TranslationDirection.FROM_ENGLISH
 import io.github.loeswerkman.language_trainer.vocabulary.TranslationDirection.TO_ENGLISH
 import io.github.loeswerkman.language_trainer.vocabulary.VocabularyEntry
+import io.github.loeswerkman.language_trainer.vocabulary.VocabularyItem
 import io.github.loeswerkman.language_trainer.vocabulary.WordCategory
 import io.github.loeswerkman.language_trainer.vocabulary.WordStatistics
 import java.nio.file.Files
@@ -65,7 +66,9 @@ class TrainingRepositoryTest {
     }
 
     @Test
-    fun vocabularyStatisticsCountAllSessionsAndIncludeUnansweredWords() {
+    fun vocabularyCountsAllSessionsAndIncludesUnansweredWords() {
+        var now = 1_000L
+        val training = TrainingRepository(database, words) { now }
         words.sync("russian", listOf(entry("cat", "кошка"), entry("dog", "собака"), entry("bird", "птица")))
         words.sync("dutch", listOf(entry("cat", "kat")))
         val (cat, dog) = words.findAll("russian")
@@ -73,14 +76,15 @@ class TrainingRepositoryTest {
             val session = training.startSession("russian")
             training.recordAnswer(session, AnswerSubmission(cat.id, TO_ENGLISH, "cat"))
             training.recordAnswer(session, AnswerSubmission(dog.id, TO_ENGLISH, "wrong"))
+            now += 1_000
         }
 
-        val statistics = training.vocabularyStatistics("russian")
+        val vocabulary = training.vocabulary("russian")
 
-        assertEquals(listOf("cat", "bird", "dog"), statistics.map { it.word })
-        assertEquals(WordStatistics(cat.id, "cat", "кошка", 2, 0, 0), statistics[0])
-        assertEquals(0, statistics[1].correct + statistics[1].almostCorrect + statistics[1].incorrect)
-        assertEquals(2, statistics[2].incorrect)
+        assertEquals(listOf("cat", "dog", "bird"), vocabulary.map { it.word.word })
+        assertEquals(VocabularyItem(cat, correct = 2, lastAnsweredAt = 2_000), vocabulary[0])
+        assertEquals(VocabularyItem(dog, incorrect = 2, lastAnsweredAt = 2_000), vocabulary[1])
+        assertEquals(VocabularyItem(vocabulary[2].word), vocabulary[2])
     }
 
     @Test
@@ -92,7 +96,7 @@ class TrainingRepositoryTest {
 
         words.sync("russian", listOf(cat.copy(translationAlternatives = listOf("кот"))))
 
-        assertEquals(1, training.vocabularyStatistics("russian").single().correct)
+        assertEquals(1, training.vocabulary("russian").single().correct)
     }
 
     private fun entry(word: String, translation: String) = VocabularyEntry(

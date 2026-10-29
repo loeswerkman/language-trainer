@@ -5,6 +5,7 @@ import io.github.loeswerkman.language_trainer.training.RecordedAnswer
 import io.github.loeswerkman.language_trainer.training.TrainingSession
 import io.github.loeswerkman.language_trainer.vocabulary.AnswerResult
 import io.github.loeswerkman.language_trainer.vocabulary.TranslationDirection
+import io.github.loeswerkman.language_trainer.vocabulary.VocabularyItem
 import io.github.loeswerkman.language_trainer.vocabulary.Word
 import io.github.loeswerkman.language_trainer.vocabulary.WordStatistics
 import io.ktor.client.request.*
@@ -111,7 +112,10 @@ class ApplicationTest {
 
         val expected = listOf(WordStatistics(cat.id, "cat", "кошка", correct = 1, almostCorrect = 1, incorrect = 1))
         assertEquals(expected, Json.decodeFromString<List<WordStatistics>>(client.get("/api/sessions/${session.id}/results").bodyAsText()))
-        assertEquals(expected, Json.decodeFromString<List<WordStatistics>>(client.get("/api/vocabulary?language=russian").bodyAsText()))
+        val vocabulary = Json.decodeFromString<List<VocabularyItem>>(client.get("/api/vocabulary?language=russian").bodyAsText()).single()
+        assertEquals(cat, vocabulary.word)
+        assertEquals(Triple(1, 1, 1), Triple(vocabulary.correct, vocabulary.almostCorrect, vocabulary.incorrect))
+        assertNotNull(vocabulary.lastAnsweredAt)
 
         assertEquals(HttpStatusCode.NotFound, answer(999, cat.id, "cat").status)
         assertEquals(HttpStatusCode.BadRequest, answer(session.id, 999, "cat").status)

@@ -4,6 +4,8 @@ import io.github.loeswerkman.language_trainer.training.AnswerSubmission
 import io.github.loeswerkman.language_trainer.training.RecordedAnswer
 import io.github.loeswerkman.language_trainer.training.StartSessionRequest
 import io.github.loeswerkman.language_trainer.training.TrainingSession
+import io.github.loeswerkman.language_trainer.trainer.TrainingApi
+import io.github.loeswerkman.language_trainer.vocabulary.VocabularyItem
 import io.github.loeswerkman.language_trainer.vocabulary.Word
 import io.github.loeswerkman.language_trainer.vocabulary.WordStatistics
 import io.ktor.client.HttpClient
@@ -23,14 +25,14 @@ class VocabularyClient(
         expectSuccess = true
         install(ContentNegotiation) { json() }
     },
-) {
+) : TrainingApi {
     suspend fun fetchLanguages(): List<String> = httpClient.get("/api/languages").body()
 
     suspend fun fetchWords(language: String): List<Word> =
         httpClient.get("/api/words") { parameter("language", language) }.body()
 
-    /** Every word of [language] with how often it was answered correctly, almost correctly and incorrectly. */
-    suspend fun fetchVocabulary(language: String): List<WordStatistics> =
+    /** Every word of [language] with how often and when it was answered. */
+    override suspend fun fetchVocabulary(language: String): List<VocabularyItem> =
         httpClient.get("/api/vocabulary") { parameter("language", language) }.body()
 
     suspend fun startSession(language: String): TrainingSession =
@@ -39,7 +41,7 @@ class VocabularyClient(
             setBody(StartSessionRequest(language))
         }.body()
 
-    suspend fun submitAnswer(sessionId: Long, submission: AnswerSubmission): RecordedAnswer =
+    override suspend fun submitAnswer(sessionId: Long, submission: AnswerSubmission): RecordedAnswer =
         httpClient.post("/api/sessions/$sessionId/answers") {
             contentType(ContentType.Application.Json)
             setBody(submission)

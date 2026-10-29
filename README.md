@@ -67,15 +67,36 @@ serves the app for these URLs so refreshing works.
 Opening the training page starts a new training session. Every answer is sent to the server, which
 evaluates it again and saves it with the session, word, direction and result (correct, almost correct
 or incorrect). "Finish session" shows how each word was answered in that session. The vocabulary page
-lists every main word and translation with its counts over all sessions, sorted by correct minus
-incorrect answers. The counts are not stored: they are calculated from the saved answers.
+lists every main word with its translation, category, tags, complexity, usefulness, counts over all
+sessions, score (correct minus incorrect) and when it was last answered. The counts are not stored: they
+are calculated from the saved answers.
+
+### Filtering and sorting
+
+The vocabulary table and training each have their own filter and sort per language, saved in the
+browser's `localStorage` (keys `vocabulary-query.<language>` and `training-query.<language>`). "Filter"
+opens a dialog with groups of conditions: every condition in a group must match (AND), and an item
+matching any group is shown (OR). The funnel icon in a column header opens the same dialog with a
+condition on that column. "Sort" sets one or more sort keys (any field, or Random). Clicking a column
+header sorts on that column, a second click reverses the direction and a third click removes that
+column from the sort again. Removing every sort key, including the default one, leaves the items in
+their original order, and that choice is remembered. Both dialogs offer "Reset to default". By default the table shows all
+words sorted by word (A–Z), and training shows words answered correctly fewer than 5 times, never
+answered or longest ago first, then easiest first. Confirming a new filter or sort during training
+reorders the cards still to come in the round, using the latest statistics.
+On the vocabulary page only, "Columns" shows or hides columns; this is saved per language under
+`vocabulary-columns.<language>` and doesn't affect filtering, sorting or training.
+
+Filtering and sorting happen in the browser. The engine (`Field`, `FieldSet`, `ListQuery` in
+`core/.../query`) and the table (`DataTable` in `app/shared/.../components/table`) are generic, so other
+lists can define their own fields and columns. See the [filterable tables ADR](./docs/adrs/2026-10-29-10-00-filterable-tables.md).
 
 API endpoints:
 
 - `POST /api/sessions` with `{"language": "russian"}` starts a session
 - `POST /api/sessions/{id}/answers` with `{"wordId": 1, "direction": "TO_ENGLISH", "answer": "hello"}` saves an answer
 - `GET /api/sessions/{id}/results` returns the counts per word for one session
-- `GET /api/vocabulary?language=russian` returns the counts per word over all sessions
+- `GET /api/vocabulary?language=russian` returns every word with its counts over all sessions and when it was last answered
 
 The server stores its data in a SQLite database at `data/language-trainer.db` (git-ignored). Existing
 databases automatically gain the English alternatives column and the training tables on startup,

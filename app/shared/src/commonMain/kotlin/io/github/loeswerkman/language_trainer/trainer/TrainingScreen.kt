@@ -1,6 +1,7 @@
 package io.github.loeswerkman.language_trainer.trainer
 
 import androidx.compose.foundation.layout.ColumnScope
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -12,17 +13,15 @@ import androidx.compose.runtime.setValue
 import io.github.loeswerkman.language_trainer.components.ErrorMessage
 import io.github.loeswerkman.language_trainer.components.Link
 import io.github.loeswerkman.language_trainer.components.Loadable
+import io.github.loeswerkman.language_trainer.components.query.QueryDialogs
+import io.github.loeswerkman.language_trainer.components.query.QueryToolbar
 import io.github.loeswerkman.language_trainer.data.VocabularyClient
 import io.github.loeswerkman.language_trainer.navigation.languageDisplayName
-import io.github.loeswerkman.language_trainer.training.AnswerSubmission
 import io.github.loeswerkman.language_trainer.training.TrainingSession
-import io.github.loeswerkman.language_trainer.vocabulary.Word
-import kotlinx.coroutines.CancellationException
-import kotlinx.coroutines.Job
-import kotlinx.coroutines.joinAll
-import kotlinx.coroutines.launch
+import io.github.loeswerkman.language_trainer.vocabulary.VocabularyItem
+import io.github.loeswerkman.language_trainer.vocabulary.VocabularyQueries
 
-private data class TrainingData(val words: List<Word>, val session: TrainingSession)
+private data class TrainingData(val items: List<VocabularyItem>, val session: TrainingSession)
 
 @Composable
 fun ColumnScope.TrainingScreen(client: VocabularyClient, language: String) {
@@ -30,25 +29,25 @@ fun ColumnScope.TrainingScreen(client: VocabularyClient, language: String) {
     Text("Currently training: ${languageDisplayName(language)}", style = MaterialTheme.typography.headlineMedium)
     Loadable(
         key = language to sessionNumber,
-        load = { TrainingData(client.fetchWords(language), client.startSession(language)) },
-    ) { (words, session) ->
-        if (words.isEmpty()) ErrorMessage("No words found. Add some to vocabulary/$language.yaml.")
-        else TrainingSessionScreen(client, words, session, onStartNewSession = { sessionNumber++ })
+        load = { TrainingData(client.fetchVocabulary(language), client.startSession(language)) },
+    ) { (items, session) ->
+        if (items.isEmpty()) ErrorMessage("No words found. Add some to vocabulary/$language.yaml.")
+        else TrainingSessionScreen(client, items, session, onStartNewSession = { sessionNumber++ })
     }
 }
 
-/** Practises [words] and saves every answer in [session]. Finishing the session shows its results. */
+/** Shows a [TrainingController]: the training query, the current card, and the results once finished. */
 @Composable
 private fun ColumnScope.TrainingSessionScreen(
     client: VocabularyClient,
-    words: List<Word>,
+    items: List<VocabularyItem>,
     session: TrainingSession,
     onStartNewSession: () -> Unit,
 ) {
     val scope = rememberCoroutineScope()
-    val pendingSaves = remember(session) { mutableListOf<Job>() }
-    var answeredCount by remember(session) { mutableStateOf(0) }
-    var saveError by remember(session) { mutableStateOf<String?>(null) }
+    val controller = remember(session) {
+        TrainingController(client, session, items, VocabularyQueries.trainingStore(session.language), scope)
+    }
     var isFinished by remember(session) { mutableStateOf(false) }
 
     if (isFinished) {
@@ -56,27 +55,23 @@ private fun ColumnScope.TrainingSessionScreen(
             key = session.id,
             // Wait for answers that are still being saved, so they are included in the results.
             load = {
-                pendingSaves.joinAll()
+                controller.awaitPendingSaves()
                 client.fetchSessionResults(session.id)
             },
         ) { results -> SessionResults(results, onStartNewSession) }
         return
     }
 
-    FlashcardScreen(words, onAnswered = { word, direction, answer ->
-        answeredCount++
-        pendingSaves += scope.launch {
-            try {
-                client.submitAnswer(session.id, AnswerSubmission(word.id, direction, answer))
-            } catch (e: CancellationException) {
-                throw e
-            } catch (e: Exception) {
-                saveError = "Could not save your answer: ${e.message ?: e}"
-            }
-        }
-    })
-    saveError?.let { ErrorMessage(it) }
-    if (answeredCount > 0) {
+    QueryToolbar(controller.query, summary = "Training ${controller.matchCount} of ${controller.items.size} words")
+    val round = controller.visibleRound
+    when {
+        round != null -> FlashcardScreen(round, onSubmit = controller::submit, onNext = controller::next)
+        controller.isReloading -> CircularProgressIndicator()
+        else -> ErrorMessage("No words match the filter. Change it to keep training.")
+    }
+    controller.error?.let { ErrorMessage(it) }
+    if (controller.answeredCount > 0) {
         Link("Finish session", onClick = { isFinished = true }, style = MaterialTheme.typography.bodyLarge)
     }
+    QueryDialogs(controller.query, controller.items)
 }
