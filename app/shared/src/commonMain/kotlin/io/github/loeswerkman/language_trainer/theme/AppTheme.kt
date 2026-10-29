@@ -10,6 +10,8 @@ object AppColors {
     val accent = Color(0xFFD0BCFF)
     val background = Color.Black
     val text = Color.White
+    val correct = Color(0xFF66BB6A)
+    val almostCorrect = Color(0xFFFFA726)
 }
 
 @Composable

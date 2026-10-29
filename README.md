@@ -58,13 +58,29 @@ To practise words locally, start the server first and then the web app, and open
 [http://localhost:8081](http://localhost:8081). The web app's dev server forwards `/api` requests to the
 server on port 8080.
 
-Each page has its own URL, e.g. `/russian` for the language page and `/russian/training` for training. The app
-switches pages without reloading, and the dev server serves the app for these URLs so refreshing works.
+Each page has its own URL, e.g. `/russian` for the language page, `/russian/training` for training and
+`/russian/vocabulary` for the vocabulary overview. The app switches pages without reloading, and the dev server
+serves the app for these URLs so refreshing works.
+
+### Training sessions and results
+
+Opening the training page starts a new training session. Every answer is sent to the server, which
+evaluates it again and saves it with the session, word, direction and result (correct, almost correct
+or incorrect). "Finish session" shows how each word was answered in that session. The vocabulary page
+lists every main word and translation with its counts over all sessions, sorted by correct minus
+incorrect answers. The counts are not stored: they are calculated from the saved answers.
+
+API endpoints:
+
+- `POST /api/sessions` with `{"language": "russian"}` starts a session
+- `POST /api/sessions/{id}/answers` with `{"wordId": 1, "direction": "TO_ENGLISH", "answer": "hello"}` saves an answer
+- `GET /api/sessions/{id}/results` returns the counts per word for one session
+- `GET /api/vocabulary?language=russian` returns the counts per word over all sessions
 
 The server stores its data in a SQLite database at `data/language-trainer.db` (git-ignored). Existing
-databases automatically gain the English alternatives column on startup, preserving word IDs and Russian
-alternatives. There is no general migration system yet: other schema changes may require rebuilding
-the database from the YAML.
+databases automatically gain the English alternatives column and the training tables on startup,
+preserving word IDs and Russian alternatives. There is no general migration system yet. Because the
+database now holds answer history that is not in the YAML, deleting it loses all training results.
 The paths can be changed with the `DATABASE_FILE` and `VOCABULARY_DIR` environment variables.
 
 ### Running tests

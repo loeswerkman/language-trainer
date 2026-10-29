@@ -30,6 +30,7 @@ import io.github.loeswerkman.language_trainer.navigation.onPathChanged
 import io.github.loeswerkman.language_trainer.navigation.pushPath
 import io.github.loeswerkman.language_trainer.theme.AppTheme
 import io.github.loeswerkman.language_trainer.trainer.TrainingScreen
+import io.github.loeswerkman.language_trainer.vocabulary.VocabularyScreen
 
 @Composable
 @Preview
@@ -50,15 +51,18 @@ fun App() {
             Box(modifier = Modifier.safeContentPadding().fillMaxSize().padding(24.dp)) {
                 Breadcrumbs(route, onNavigate = navigate, modifier = Modifier.align(Alignment.TopStart))
                 Column(
-                    modifier = Modifier.align(Alignment.Center).widthIn(max = 480.dp).fillMaxWidth(),
+                    modifier = Modifier.align(Alignment.Center).padding(top = 32.dp).widthIn(max = 560.dp).fillMaxWidth(),
                     horizontalAlignment = Alignment.CenterHorizontally,
                     verticalArrangement = Arrangement.spacedBy(16.dp),
                 ) {
                     when (val current = route) {
                         Route.Home -> HomeScreen(client, onLanguageSelected = { navigate(Route.LanguageHome(it)) })
-                        is Route.LanguageHome ->
-                            LanguageHomeScreen(onTrainingSelected = { navigate(Route.Training(current.language)) })
+                        is Route.LanguageHome -> LanguageHomeScreen(
+                            onTrainingSelected = { navigate(Route.Training(current.language)) },
+                            onVocabularySelected = { navigate(Route.Vocabulary(current.language)) },
+                        )
                         is Route.Training -> TrainingScreen(client, current.language)
+                        is Route.Vocabulary -> VocabularyScreen(client, current.language)
                     }
                 }
             }

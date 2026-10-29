@@ -19,4 +19,4 @@ captures
 node_modules/
 
 # Local SQLite database
-data/
+/data/

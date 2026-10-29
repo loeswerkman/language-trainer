@@ -20,6 +20,11 @@ sealed interface Route {
         override val breadcrumbs = LanguageHome(language).breadcrumbs + Breadcrumb("Training", this)
     }
 
+    data class Vocabulary(val language: String) : Route {
+        override val path = "/$language/vocabulary"
+        override val breadcrumbs = LanguageHome(language).breadcrumbs + Breadcrumb("Vocabulary", this)
+    }
+
     companion object {
         /** Maps a URL path back to its page. Unknown paths lead to [Home]. */
         fun fromPath(path: String): Route {
@@ -28,6 +33,7 @@ sealed interface Route {
                 segments.isEmpty() -> Home
                 segments.size == 1 -> LanguageHome(segments[0])
                 segments.size == 2 && segments[1] == "training" -> Training(segments[0])
+                segments.size == 2 && segments[1] == "vocabulary" -> Vocabulary(segments[0])
                 else -> Home
             }
         }

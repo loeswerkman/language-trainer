@@ -21,9 +21,9 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.unit.dp
+import io.github.loeswerkman.language_trainer.theme.AppColors
 import io.github.loeswerkman.language_trainer.vocabulary.AnswerResult
 import io.github.loeswerkman.language_trainer.vocabulary.TranslationDirection
 import io.github.loeswerkman.language_trainer.vocabulary.acceptedAnswers
@@ -31,7 +31,7 @@ import io.github.loeswerkman.language_trainer.vocabulary.prompt
 import io.github.loeswerkman.language_trainer.vocabulary.Word
 
 @Composable
-fun FlashcardScreen(words: List<Word>) {
+fun FlashcardScreen(words: List<Word>, onAnswered: (Word, TranslationDirection, String) -> Unit = { _, _, _ -> }) {
     var session by remember(words) { mutableStateOf(FlashcardSession.start(words)) }
     var answer by remember { mutableStateOf("") }
     val focusRequester = remember { FocusRequester() }
@@ -41,6 +41,7 @@ fun FlashcardScreen(words: List<Word>) {
             session = session.next()
             answer = ""
         } else {
+            onAnswered(session.currentWord, session.direction, answer)
             session = session.submit(answer)
         }
     }
@@ -101,8 +102,8 @@ fun FlashcardScreen(words: List<Word>) {
 private fun Feedback(result: AnswerResult, acceptedAnswers: List<String>, notes: String?) {
     val answer = acceptedAnswers.first()
     val (title, color) = when (result) {
-        AnswerResult.CORRECT -> "Correct!" to Color(0xFF66BB6A)
-        AnswerResult.ALMOST_CORRECT -> "Almost! The answer is $answer" to Color(0xFFFFA726)
+        AnswerResult.CORRECT -> "Correct!" to AppColors.correct
+        AnswerResult.ALMOST_CORRECT -> "Almost! The answer is $answer" to AppColors.almostCorrect
         AnswerResult.INCORRECT -> "Incorrect. The answer is $answer" to MaterialTheme.colorScheme.error
     }
     Column(horizontalAlignment = Alignment.CenterHorizontally, verticalArrangement = Arrangement.spacedBy(4.dp)) {

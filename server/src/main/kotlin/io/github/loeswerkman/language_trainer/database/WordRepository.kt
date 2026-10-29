@@ -26,6 +26,10 @@ class WordRepository(private val database: Database) {
         query.orderBy(WordsTable.id).map { it.toWord() }
     }
 
+    fun findById(id: Long): Word? = transaction(database) {
+        WordsTable.selectAll().where { WordsTable.id eq id }.singleOrNull()?.toWord()
+    }
+
     fun findLanguages(): List<String> = transaction(database) {
         WordsTable.select(WordsTable.language)
             .withDistinct()
