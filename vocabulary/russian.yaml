@@ -448,20 +448,20 @@
   complexity: 1
   usefulness: 4
 
-- word: "mother"
-  wordAlternatives: ["mom", "mum"]
-  translation: "мать"
-  translationAlternatives: ["мама"]
+- word: "mom"
+  wordAlternatives: ["mother", "mum"]
+  translation: "мама"
+  translationAlternatives: ["мать"]
   category: "noun"
   tags: ["family"]
   complexity: 1
   usefulness: 5
   notes: "Мама is the familiar, everyday form."
 
-- word: "father"
-  wordAlternatives: ["dad"]
-  translation: "отец"
-  translationAlternatives: ["папа"]
+- word: "dad"
+  wordAlternatives: ["father"]
+  translation: "папа"
+  translationAlternatives: ["отец"]
   category: "noun"
   tags: ["family"]
   complexity: 1
@@ -637,16 +637,6 @@
   complexity: 2
   usefulness: 4
   notes: "The evening meal. Обедать refers to having the midday meal."
-
-- word: "university teacher"
-  wordAlternatives: ["university lecturer"]
-  translation: "преподаватель университета"
-  translationAlternatives: ["университетский преподаватель", "преподавательница университета"]
-  category: "noun"
-  tags: ["professions", "education"]
-  complexity: 3
-  usefulness: 3
-  notes: "Преподаватель is also sufficient when the university context is clear. Профессор is a specific academic title."
 
 - word: "message"
   translation: "сообщение"
