@@ -428,12 +428,11 @@
 
 - word: "friend"
   translation: "друг"
-  translationAlternatives: ["подруга"]
   category: "noun"
   tags: ["people"]
   complexity: 1
   usefulness: 5
-  notes: "Друг is masculine; подруга is feminine."
+  notes: "Друг is masculine; for a female friend, use подруга."
 
 - word: "brother"
   translation: "брат"
@@ -952,3 +951,451 @@
   complexity: 2
   usefulness: 5
   notes: "Recipient without a preposition: я даю им книгу (I give them a book). After к, use ним: к ним (towards them)."
+
+- word: "friend (girl)"
+  wordAlternatives: ["friend", "female friend", "girlfriend", "friend (female)"]
+  translation: "подруга"
+  category: "noun"
+  tags: ["people"]
+  complexity: 1
+  usefulness: 5
+  notes: "Подруга is a female friend. It can also mean girlfriend, depending on context."
+
+- word: "to repeat"
+  translation: "повторять"
+  translationAlternatives: ["повторить"]
+  category: "verb"
+  tags: ["education", "activities"]
+  complexity: 2
+  usefulness: 5
+  notes: "Повторять is imperfective (repeat regularly), повторить is perfective (repeat once). Повторите, пожалуйста: please repeat."
+
+- word: "nice to meet you"
+  wordAlternatives: ["pleased to meet you"]
+  translation: "очень приятно"
+  translationAlternatives: ["приятно познакомиться"]
+  category: "phrase"
+  tags: ["basics", "greeting", "politeness"]
+  complexity: 2
+  usefulness: 5
+
+- word: "answer"
+  wordAlternatives: ["reply"]
+  translation: "ответ"
+  category: "noun"
+  tags: ["communication", "education"]
+  complexity: 1
+  usefulness: 5
+
+- word: "break"
+  wordAlternatives: ["pause"]
+  translation: "перерыв"
+  category: "noun"
+  tags: ["work", "time"]
+  complexity: 2
+  usefulness: 4
+  notes: "A break between tasks or lessons: сделать перерыв (to take a break)."
+
+- word: "page"
+  translation: "страница"
+  category: "noun"
+  tags: ["reading", "education"]
+  complexity: 2
+  usefulness: 4
+
+- word: "bike"
+  wordAlternatives: ["bicycle"]
+  translation: "велосипед"
+  category: "noun"
+  tags: ["transport"]
+  complexity: 2
+  usefulness: 4
+
+- word: "thing"
+  translation: "вещь"
+  translationAlternatives: ["штука"]
+  category: "noun"
+  tags: ["basics", "objects"]
+  complexity: 2
+  usefulness: 5
+  notes: "Вещь is feminine and means a physical thing. Штука is informal (thingy). For a thing to do or a matter, use дело."
+
+- word: "translation"
+  translation: "перевод"
+  category: "noun"
+  tags: ["education", "communication"]
+  complexity: 2
+  usefulness: 4
+
+- word: "telephone"
+  wordAlternatives: ["phone"]
+  translation: "телефон"
+  category: "noun"
+  tags: ["objects", "communication"]
+  complexity: 1
+  usefulness: 5
+
+- word: "new"
+  translation: "новый"
+  category: "adjective"
+  tags: ["descriptions"]
+  complexity: 1
+  usefulness: 5
+  notes: "Masculine dictionary form; feminine новая, neuter новое, plural новые."
+
+- word: "week"
+  translation: "неделя"
+  category: "noun"
+  tags: ["time"]
+  complexity: 1
+  usefulness: 5
+
+- word: "today"
+  translation: "сегодня"
+  category: "adverb"
+  tags: ["time", "basics"]
+  complexity: 2
+  usefulness: 5
+  notes: "The г is pronounced as в: севодня."
+
+- word: "day"
+  translation: "день"
+  category: "noun"
+  tags: ["time", "basics"]
+  complexity: 1
+  usefulness: 5
+  notes: "Добрый день: good afternoon."
+
+- word: "law"
+  translation: "закон"
+  category: "noun"
+  tags: ["society"]
+  complexity: 2
+  usefulness: 3
+
+- word: "rights"
+  translation: "права"
+  category: "noun"
+  tags: ["society"]
+  complexity: 3
+  usefulness: 3
+  notes: "Plural of право (right). Права can also mean driving licence."
+
+- word: "rule"
+  translation: "правило"
+  category: "noun"
+  tags: ["society", "education"]
+  complexity: 2
+  usefulness: 4
+
+- word: "correct"
+  wordAlternatives: ["right"]
+  translation: "правильный"
+  translationAlternatives: ["верный"]
+  category: "adjective"
+  tags: ["descriptions", "education"]
+  complexity: 2
+  usefulness: 5
+  notes: "Masculine dictionary form. As a reply, use the adverb: правильно (that's right)."
+
+- word: "event"
+  translation: "событие"
+  translationAlternatives: ["мероприятие"]
+  category: "noun"
+  tags: ["activities"]
+  complexity: 3
+  usefulness: 3
+  notes: "Событие is something that happens; мероприятие is an organised event."
+
+- word: "decision"
+  wordAlternatives: ["solution"]
+  translation: "решение"
+  category: "noun"
+  tags: ["work"]
+  complexity: 2
+  usefulness: 4
+  notes: "Решение means both a decision and a solution (to a problem)."
+
+- word: "lake"
+  translation: "озеро"
+  category: "noun"
+  tags: ["nature", "places"]
+  complexity: 2
+  usefulness: 3
+
+- word: "egg"
+  translation: "яйцо"
+  category: "noun"
+  tags: ["food and drink"]
+  complexity: 2
+  usefulness: 4
+  notes: "Plural: яйца."
+
+- word: "article"
+  translation: "статья"
+  category: "noun"
+  tags: ["reading"]
+  complexity: 2
+  usefulness: 3
+  notes: "An article in a newspaper or magazine. Статья also means an article (section) of a law."
+
+- word: "street"
+  translation: "улица"
+  category: "noun"
+  tags: ["places"]
+  complexity: 1
+  usefulness: 5
+  notes: "На улице: in the street, but also outside."
+
+- word: "village"
+  translation: "деревня"
+  translationAlternatives: ["село"]
+  category: "noun"
+  tags: ["places"]
+  complexity: 2
+  usefulness: 3
+  notes: "Село is traditionally a larger village with a church."
+
+- word: "city"
+  wordAlternatives: ["town"]
+  translation: "город"
+  category: "noun"
+  tags: ["places"]
+  complexity: 1
+  usefulness: 5
+
+- word: "square"
+  translation: "площадь"
+  category: "noun"
+  tags: ["places"]
+  complexity: 2
+  usefulness: 3
+  notes: "A town square, e.g. Красная площадь (Red Square). Площадь is feminine and also means area."
+
+- word: "next"
+  translation: "следующий"
+  category: "adjective"
+  tags: ["descriptions", "time"]
+  complexity: 3
+  usefulness: 5
+  notes: "Masculine dictionary form; feminine следующая, neuter следующее, plural следующие. Следующая неделя: next week."
+
+- word: "guest"
+  translation: "гость"
+  translationAlternatives: ["гостья"]
+  category: "noun"
+  tags: ["people"]
+  complexity: 2
+  usefulness: 3
+  notes: "Гостья is a female guest. В гостях: visiting someone."
+
+- word: "business"
+  translation: "бизнес"
+  translationAlternatives: ["дело"]
+  category: "noun"
+  tags: ["work"]
+  complexity: 2
+  usefulness: 4
+  notes: "Бизнес is business as an activity or company; дело is a matter or affair (also business)."
+
+- word: "meeting"
+  translation: "встреча"
+  translationAlternatives: ["собрание"]
+  category: "noun"
+  tags: ["work", "activities"]
+  complexity: 2
+  usefulness: 4
+  notes: "Встреча is any meeting or appointment; собрание is a formal meeting or assembly."
+
+- word: "pencil"
+  translation: "карандаш"
+  category: "noun"
+  tags: ["objects", "education"]
+  complexity: 2
+  usefulness: 3
+
+- word: "pen"
+  translation: "ручка"
+  category: "noun"
+  tags: ["objects", "education"]
+  complexity: 1
+  usefulness: 4
+  notes: "Ручка also means handle (e.g. a door handle)."
+
+- word: "hour"
+  translation: "час"
+  category: "noun"
+  tags: ["time"]
+  complexity: 1
+  usefulness: 5
+  notes: "Который час? What time is it?"
+
+- word: "watch"
+  wordAlternatives: ["clock", "hours"]
+  translation: "часы"
+  category: "noun"
+  tags: ["objects", "time"]
+  complexity: 2
+  usefulness: 4
+  notes: "Часы is always plural and means both watch and clock."
+
+- word: "training"
+  wordAlternatives: ["practice", "workout"]
+  translation: "тренировка"
+  translationAlternatives: ["тренинг"]
+  category: "noun"
+  tags: ["sport", "activities"]
+  complexity: 2
+  usefulness: 4
+  notes: "Тренировка is (sports) practice; тренинг is a course or workshop, e.g. at work."
+
+- word: "doctor"
+  translation: "врач"
+  translationAlternatives: ["доктор"]
+  category: "noun"
+  tags: ["professions"]
+  complexity: 2
+  usefulness: 4
+  notes: "Врач is the job; доктор is often used to address a doctor."
+
+- word: "vegetable"
+  translation: "овощ"
+  category: "noun"
+  tags: ["food and drink"]
+  complexity: 2
+  usefulness: 3
+  notes: "Usually plural: овощи (vegetables)."
+
+- word: "person"
+  translation: "человек"
+  category: "noun"
+  tags: ["people", "basics"]
+  complexity: 1
+  usefulness: 5
+  notes: "The plural is люди (people). After numbers, use человек: пять человек (five people)."
+
+- word: "people"
+  translation: "люди"
+  category: "noun"
+  tags: ["people", "basics"]
+  complexity: 1
+  usefulness: 5
+  notes: "Plural of человек (person)."
+
+- word: "exception"
+  translation: "исключение"
+  category: "noun"
+  tags: ["education"]
+  complexity: 3
+  usefulness: 3
+
+- word: "child"
+  wordAlternatives: ["kid"]
+  translation: "ребёнок"
+  translationAlternatives: ["ребенок"]
+  category: "noun"
+  tags: ["people", "family"]
+  complexity: 2
+  usefulness: 5
+  notes: "The plural is дети (children). Russian often writes е instead of ё."
+
+- word: "night"
+  translation: "ночь"
+  category: "noun"
+  tags: ["time"]
+  complexity: 1
+  usefulness: 5
+  notes: "Спокойной ночи: good night."
+
+- word: "problem"
+  wordAlternatives: ["issue"]
+  translation: "проблема"
+  category: "noun"
+  tags: ["basics"]
+  complexity: 1
+  usefulness: 5
+  notes: "Нет проблем: no problem."
+
+- word: "market"
+  translation: "рынок"
+  category: "noun"
+  tags: ["shopping", "places"]
+  complexity: 2
+  usefulness: 3
+
+- word: "product"
+  translation: "продукт"
+  translationAlternatives: ["товар"]
+  category: "noun"
+  tags: ["shopping"]
+  complexity: 2
+  usefulness: 3
+  notes: "Продукты (plural) usually means groceries; товар is merchandise or goods."
+
+- word: "to do groceries"
+  wordAlternatives: ["to do the groceries", "to buy groceries", "to go grocery shopping"]
+  translation: "покупать продукты"
+  translationAlternatives: ["ходить за продуктами", "делать покупки"]
+  category: "verb"
+  tags: ["shopping", "activities"]
+  complexity: 3
+  usefulness: 4
+  notes: "Ходить за продуктами: to go out for groceries. Делать покупки is shopping in general."
+
+- word: "juice"
+  translation: "сок"
+  category: "noun"
+  tags: ["food and drink"]
+  complexity: 1
+  usefulness: 4
+
+- word: "orange (fruit)"
+  wordAlternatives: ["orange"]
+  translation: "апельсин"
+  category: "noun"
+  tags: ["food and drink"]
+  complexity: 2
+  usefulness: 3
+  notes: "The fruit. The colour is оранжевый."
+
+- word: "matter"
+  wordAlternatives: ["thing", "affair", "task"]
+  translation: "дело"
+  category: "noun"
+  tags: ["basics", "work"]
+  complexity: 2
+  usefulness: 5
+  notes: "A thing to do or a matter, not an object (that is вещь). Как дела? How are things? У меня много дел: I have many things to do."
+
+- word: "sea"
+  translation: "море"
+  category: "noun"
+  tags: ["nature", "places"]
+  complexity: 1
+  usefulness: 4
+  notes: "На море: at the seaside."
+
+- word: "beer"
+  translation: "пиво"
+  category: "noun"
+  tags: ["food and drink"]
+  complexity: 1
+  usefulness: 3
+
+- word: "rain"
+  translation: "дождь"
+  category: "noun"
+  tags: ["nature"]
+  complexity: 2
+  usefulness: 4
+  notes: "Идёт дождь: it is raining."
+
+- word: "shoes"
+  wordAlternatives: ["footwear"]
+  translation: "обувь"
+  translationAlternatives: ["туфли", "ботинки"]
+  category: "noun"
+  tags: ["objects", "shopping"]
+  complexity: 2
+  usefulness: 4
+  notes: "Обувь is footwear in general (singular, feminine). Туфли are (dress) shoes, ботинки are sturdy shoes or ankle boots."
