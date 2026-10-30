@@ -41,6 +41,11 @@ enum class Operator(val label: String, val input: OperatorInput) {
     @SerialName("gte")
     AT_LEAST("≥", OperatorInput.NUMBER),
 
+    @SerialName("isYes")
+    IS_YES("is yes", OperatorInput.NONE),
+    @SerialName("isNo")
+    IS_NO("is no", OperatorInput.NONE),
+
     @SerialName("never")
     NEVER("never", OperatorInput.NONE),
     @SerialName("anytime")

@@ -120,6 +120,20 @@ class NumberField<T>(override val id: String, override val label: String, val ge
     override fun comparator(): Comparator<T> = compareBy { get(it) }
 }
 
+/** A yes/no property, such as whether a word is learned. Sorting puts "yes" first by default. */
+class BooleanField<T>(override val id: String, override val label: String, val get: (T) -> Boolean) : Field<T> {
+    override val operators = listOf(Operator.IS_YES, Operator.IS_NO)
+    override val defaultDirection = SortDirection.DESCENDING
+
+    override fun matches(item: T, condition: Condition, now: Long): Boolean = when (condition.operator) {
+        Operator.IS_YES -> get(item)
+        Operator.IS_NO -> !get(item)
+        else -> true
+    }
+
+    override fun comparator(): Comparator<T> = compareBy { get(it) }
+}
+
 /**
  * A moment in epoch milliseconds, or null if it never happened (e.g. a word that was never answered).
  * "anytime" matches every item for which it did happen.

@@ -79,10 +79,12 @@ opens a dialog with groups of conditions: every condition in a group must match 
 matching any group is shown (OR). The funnel icon in a column header opens the same dialog with a
 condition on that column. "Sort" sets one or more sort keys (any field, or Random). Clicking a column
 header sorts on that column, a second click reverses the direction and a third click removes that
-column from the sort again. Removing every sort key, including the default one, leaves the items in
+column from the sort again. A word is learned once it is answered correctly 5 times in a row: an
+incorrect answer resets that count (and makes the word unlearned again), an almost correct answer
+neither adds to nor resets it. The vocabulary page shows how many words are learned. Removing every sort key, including the default one, leaves the items in
 their original order, and that choice is remembered. Both dialogs offer "Reset to default". By default the table shows all
-words sorted by word (A–Z), and training shows words answered correctly fewer than 5 times, never
-answered or longest ago first, then easiest first. Confirming a new filter or sort during training
+words with learned words first, then by word (A–Z), and training shows words that aren't learned yet,
+never answered or longest ago first, then easiest first. Confirming a new filter or sort during training
 reorders the cards still to come in the round, using the latest statistics.
 On the vocabulary page only, "Columns" shows or hides columns; this is saved per language under
 `vocabulary-columns.<language>` and doesn't affect filtering, sorting or training.

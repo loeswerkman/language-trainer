@@ -18,6 +18,7 @@ fun vocabularyColumns(now: Long): List<TableColumn<VocabularyItem>> = with(Vocab
     listOf(
         textColumn(word, 150.dp) { it.word.word },
         textColumn(translation, 150.dp) { it.word.translation },
+        textColumn(learned, 80.dp) { if (it.learned) "✓" else "" },
         textColumn(category, 110.dp) { it.word.category.label },
         textColumn(tags, 150.dp) { it.word.tags.joinToString() },
         numberColumn(complexity, 90.dp) { it.word.complexity },

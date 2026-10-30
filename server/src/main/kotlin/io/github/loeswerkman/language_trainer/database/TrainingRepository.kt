@@ -5,8 +5,10 @@ import io.github.loeswerkman.language_trainer.training.TrainingSession
 import io.github.loeswerkman.language_trainer.vocabulary.AnswerResult
 import io.github.loeswerkman.language_trainer.vocabulary.VocabularyItem
 import io.github.loeswerkman.language_trainer.vocabulary.WordStatistics
+import io.github.loeswerkman.language_trainer.vocabulary.correctStreak
 import io.github.loeswerkman.language_trainer.vocabulary.evaluateAnswer
 import org.jetbrains.exposed.v1.core.JoinType
+import org.jetbrains.exposed.v1.core.SortOrder
 import org.jetbrains.exposed.v1.core.case
 import org.jetbrains.exposed.v1.core.eq
 import org.jetbrains.exposed.v1.core.intLiteral
@@ -80,19 +82,30 @@ class TrainingRepository(
             .sortedWith(WordStatistics.byScore)
     }
 
-    /** Every word of [language] with its results over all sessions, including words that were never answered. */
+    /**
+     * Every word of [language] with its results over all sessions, including words that were never answered, and how
+     * many times in a row it was answered correctly most recently (which decides whether it is learned).
+     */
     fun vocabulary(language: String): List<VocabularyItem> {
         val correct = countOf(AnswerResult.CORRECT)
         val almostCorrect = countOf(AnswerResult.ALMOST_CORRECT)
         val incorrect = countOf(AnswerResult.INCORRECT)
         val lastAnsweredAt = AnswersTable.answeredAt.max()
 
-        val answered = transaction(database) {
-            AnswersTable.join(WordsTable, JoinType.INNER, AnswersTable.wordId, WordsTable.id)
+        val (answered, streaks) = transaction(database) {
+            val answersOfLanguage = AnswersTable.join(WordsTable, JoinType.INNER, AnswersTable.wordId, WordsTable.id)
+            val counts = answersOfLanguage
                 .select(AnswersTable.wordId, correct, almostCorrect, incorrect, lastAnsweredAt)
                 .where { WordsTable.language eq language }
                 .groupBy(AnswersTable.wordId)
                 .associateBy { it[AnswersTable.wordId] }
+            val results = answersOfLanguage
+                .select(AnswersTable.wordId, AnswersTable.result)
+                .where { WordsTable.language eq language }
+                .orderBy(AnswersTable.answeredAt to SortOrder.ASC, AnswersTable.id to SortOrder.ASC)
+                .map { it[AnswersTable.wordId] to it[AnswersTable.result] }
+                .groupBy({ it.first }, { it.second })
+            counts to results.mapValues { (_, inOrder) -> correctStreak(inOrder) }
         }
         return words.findAll(language).map { word ->
             val row = answered[word.id] ?: return@map VocabularyItem(word)
@@ -102,6 +115,7 @@ class TrainingRepository(
                 almostCorrect = row[almostCorrect] ?: 0,
                 incorrect = row[incorrect] ?: 0,
                 lastAnsweredAt = row[lastAnsweredAt],
+                correctStreak = streaks[word.id] ?: 0,
             )
         }
     }

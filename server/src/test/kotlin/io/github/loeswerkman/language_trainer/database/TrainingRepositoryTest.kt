@@ -14,7 +14,9 @@ import kotlin.io.path.deleteRecursively
 import kotlin.test.AfterTest
 import kotlin.test.Test
 import kotlin.test.assertEquals
+import kotlin.test.assertFalse
 import kotlin.test.assertNull
+import kotlin.test.assertTrue
 
 @OptIn(ExperimentalPathApi::class)
 class TrainingRepositoryTest {
@@ -82,9 +84,32 @@ class TrainingRepositoryTest {
         val vocabulary = training.vocabulary("russian")
 
         assertEquals(listOf("cat", "dog", "bird"), vocabulary.map { it.word.word })
-        assertEquals(VocabularyItem(cat, correct = 2, lastAnsweredAt = 2_000), vocabulary[0])
+        assertEquals(VocabularyItem(cat, correct = 2, lastAnsweredAt = 2_000, correctStreak = 2), vocabulary[0])
         assertEquals(VocabularyItem(dog, incorrect = 2, lastAnsweredAt = 2_000), vocabulary[1])
         assertEquals(VocabularyItem(vocabulary[2].word), vocabulary[2])
+    }
+
+    @Test
+    fun aWordIsLearnedAfterFiveCorrectAnswersInARowUntilAnIncorrectOne() {
+        words.sync("russian", listOf(entry("cat", "кошка")))
+        val cat = words.findAll().single()
+        val session = training.startSession("russian")
+        fun answer(text: String) = training.recordAnswer(session, AnswerSubmission(cat.id, TO_ENGLISH, text))
+        fun item() = training.vocabulary("russian").single()
+
+        answer("cat")
+        answer("wrong")
+        repeat(4) { answer("cat") }
+        assertEquals(4, item().correctStreak)
+        assertFalse(item().learned)
+
+        answer("cat")
+        assertTrue(item().learned)
+
+        // Answers at the same moment keep the order in which they were given.
+        answer("wrong")
+        assertEquals(0, item().correctStreak)
+        assertFalse(item().learned)
     }
 
     @Test

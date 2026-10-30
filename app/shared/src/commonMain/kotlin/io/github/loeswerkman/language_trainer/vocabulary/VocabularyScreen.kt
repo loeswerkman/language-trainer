@@ -39,7 +39,8 @@ private fun ColumnScope.VocabularyTable(items: List<VocabularyItem>, language: S
     val columns = remember(now) { vocabularyColumns(now) }
     val shown = remember(items, state.query) { state.fields.apply(items, state.query, now) }
 
-    QueryToolbar(state, summary = "Showing ${shown.size} of ${items.size} words") {
+    val learnedCount = remember(items) { items.count { it.learned } }
+    QueryToolbar(state, summary = "Showing ${shown.size} of ${items.size} words · $learnedCount learned") {
         ColumnsButton(columns, hiddenColumns, onChange = {
             hiddenColumns = it
             columnsStore.save(it)

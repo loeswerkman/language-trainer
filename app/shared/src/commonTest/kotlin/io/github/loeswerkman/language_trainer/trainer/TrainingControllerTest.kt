@@ -26,8 +26,8 @@ class TrainingControllerTest {
 
     private val dog = VocabularyItem(word(1, "dog", complexity = 1))
     private val cat = VocabularyItem(word(2, "cat", complexity = 2))
-    private val bird = VocabularyItem(word(3, "bird", complexity = 1), correct = 1, lastAnsweredAt = 1_000)
-    private val fish = VocabularyItem(word(4, "fish", complexity = 1), correct = 5, lastAnsweredAt = 2_000)
+    private val bird = VocabularyItem(word(3, "bird", complexity = 1), correct = 6, incorrect = 1, lastAnsweredAt = 1_000, correctStreak = 0)
+    private val fish = VocabularyItem(word(4, "fish", complexity = 1), correct = 5, lastAnsweredAt = 2_000, correctStreak = 5)
 
     private class FakeApi(var items: List<VocabularyItem>) : TrainingApi {
         val submissions = mutableListOf<AnswerSubmission>()
@@ -83,7 +83,7 @@ class TrainingControllerTest {
         val api = FakeApi(listOf(bird, cat, dog, fish))
         val controller = controller(api)
         controller.submit("dog")
-        api.items = listOf(bird, cat.copy(correct = 5), dog, fish)
+        api.items = listOf(bird, cat.copy(correct = 5, correctStreak = 5), dog, fish)
 
         controller.query.confirm(controller.query.query.copy(sort = listOf(SortKey.ByField("word", SortDirection.ASCENDING))))
         advanceUntilIdle()
@@ -102,7 +102,7 @@ class TrainingControllerTest {
         val api = FakeApi(listOf(dog))
         val controller = controller(api)
         controller.submit("dog")
-        api.items = listOf(dog.copy(correct = 5))
+        api.items = listOf(dog.copy(correct = 5, correctStreak = 5))
 
         controller.next()
         assertTrue(controller.isReloading)

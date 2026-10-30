@@ -1,5 +1,6 @@
 package io.github.loeswerkman.language_trainer.vocabulary
 
+import io.github.loeswerkman.language_trainer.query.BooleanField
 import io.github.loeswerkman.language_trainer.query.ChoiceField
 import io.github.loeswerkman.language_trainer.query.DateField
 import io.github.loeswerkman.language_trainer.query.FieldSet
@@ -18,8 +19,13 @@ data class VocabularyItem(
     val incorrect: Int = 0,
     /** Epoch milliseconds of the most recent answer, or null if the word was never answered. */
     val lastAnsweredAt: Long? = null,
+    /** Correct answers in a row up to the most recent answer, see [correctStreak]. */
+    val correctStreak: Int = 0,
 ) {
     val score: Int get() = correct - incorrect
+
+    /** Answered correctly [LEARNED_STREAK] times in a row; no longer learned after an incorrect answer. */
+    val learned: Boolean get() = correctStreak >= LEARNED_STREAK
 }
 
 /** The fields of the vocabulary list, used by the vocabulary table and training. Ids are saved in queries: keep them stable. */
@@ -38,9 +44,10 @@ object VocabularyFields {
     val almostCorrect = NumberField<VocabularyItem>("almostCorrect", "Almost correct") { it.almostCorrect }
     val incorrect = NumberField<VocabularyItem>("incorrect", "Incorrect") { it.incorrect }
     val score = NumberField<VocabularyItem>("score", "Score") { it.score }
+    val learned = BooleanField<VocabularyItem>("learned", "Learned") { it.learned }
     val lastAnswered = DateField<VocabularyItem>("lastAnswered", "Last answered") { it.lastAnsweredAt }
 
     val all = FieldSet(
-        listOf(word, translation, category, tags, complexity, usefulness, correct, almostCorrect, incorrect, score, lastAnswered),
+        listOf(word, translation, learned, category, tags, complexity, usefulness, correct, almostCorrect, incorrect, score, lastAnswered),
     )
 }

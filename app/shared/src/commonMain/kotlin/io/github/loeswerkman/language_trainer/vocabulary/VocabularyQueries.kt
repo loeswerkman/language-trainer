@@ -16,14 +16,19 @@ import io.github.loeswerkman.language_trainer.storage.Settings
  */
 object VocabularyQueries {
 
-    /** Every word, alphabetically. */
-    val tableDefault = ListQuery(sort = listOf(SortKey.ByField(VocabularyFields.word.id, SortDirection.ASCENDING)))
+    /** Every word: learned words first, then alphabetically. */
+    val tableDefault = ListQuery(
+        sort = listOf(
+            SortKey.ByField(VocabularyFields.learned.id, SortDirection.DESCENDING),
+            SortKey.ByField(VocabularyFields.word.id, SortDirection.ASCENDING),
+        ),
+    )
 
     /**
-     * Words not yet answered correctly 5 times; words never (or longest ago) answered first, then the easiest.
+     * Words not yet learned; words never (or longest ago) answered first, then the easiest.
      */
     val trainingDefault = ListQuery(
-        filter = Filter(listOf(ConditionGroup(listOf(Condition(VocabularyFields.correct.id, Operator.LESS_THAN, number = 5))))),
+        filter = Filter(listOf(ConditionGroup(listOf(Condition(VocabularyFields.learned.id, Operator.IS_NO))))),
         sort = listOf(
             SortKey.ByField(VocabularyFields.lastAnswered.id, SortDirection.ASCENDING),
             SortKey.ByField(VocabularyFields.complexity.id, SortDirection.ASCENDING),

@@ -37,8 +37,12 @@ class QueryStateTest {
     @Test
     fun theDefaultSortCanBeTurnedOffAndStaysOff() {
         val state = state()
+        val byWord = SortKey.ByField("word", SortDirection.ASCENDING)
+        assertEquals(listOf(SortKey.ByField("learned", SortDirection.DESCENDING), byWord), state.query.sort)
+        state.sortBy(VocabularyFields.learned)
+        state.sortBy(VocabularyFields.learned)
+        assertEquals(listOf(byWord), state.query.sort)
         state.sortBy(VocabularyFields.word)
-        assertEquals(listOf(SortKey.ByField("word", SortDirection.DESCENDING)), state.query.sort)
         state.sortBy(VocabularyFields.word)
         assertEquals(emptyList(), state.query.sort)
 

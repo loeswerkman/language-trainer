@@ -88,6 +88,18 @@ class FieldSetTest {
     }
 
     @Test
+    fun booleanOperatorsAndSortingPutYesFirst() {
+        val vowel = BooleanField<Letter>("vowel", "Vowel") { it.kind == "vowel" }
+        val set = FieldSet(listOf(name, vowel))
+
+        assertEquals(listOf(a), letters.filter { set.matches(it, filter(listOf(Condition("vowel", Operator.IS_YES))), now) })
+        assertEquals(listOf(b, c), letters.filter { set.matches(it, filter(listOf(Condition("vowel", Operator.IS_NO))), now) })
+        val sort = listOf(SortKey.ByField("vowel", vowel.defaultDirection), SortKey.ByField("name", SortDirection.DESCENDING))
+        assertEquals(listOf(a, c, b), set.sort(letters, sort))
+        assertEquals("Vowel is no", set.describe(filter(listOf(Condition("vowel", Operator.IS_NO)))))
+    }
+
+    @Test
     fun sortsOnSeveralKeys() {
         val sorted = fields.sort(
             letters,
@@ -131,7 +143,7 @@ class FieldSetTest {
     }
 
     @Test
-    fun removingTheLastKeyFallsBackToTheDefaultSort() {
+    fun removingTheLastKeyLeavesNoSort() {
         val flipped = fields.sortBy(level, fields.sortBy(level, emptyList()))
         assertEquals(listOf(SortKey.ByField("level", SortDirection.ASCENDING)), flipped)
         assertEquals(emptyList(), fields.sortBy(level, flipped))

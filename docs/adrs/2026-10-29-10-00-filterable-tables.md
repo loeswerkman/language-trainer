@@ -25,7 +25,7 @@ isn't a table, such as the order of flashcards.
 Build the filtering, sorting and table ourselves, split into reusable layers:
 
 - **Query engine (core, no UI)**: `ListQuery` (a `Filter` of OR-ed `ConditionGroup`s of AND-ed `Condition`s, plus a
-  list of `SortKey`s, including `Random`), `Field` types (text, choice, tags, number, date) that decide their
+  list of `SortKey`s, including `Random`), `Field` types (text, choice, tags, number, boolean, date) that decide their
   operators, matching and comparing, and `FieldSet`, which filters, sorts, sanitizes and describes queries for a list.
   Each list defines its fields once, e.g. `VocabularyFields`.
 - **UI components (app)**: a generic `DataTable` whose columns may be linked to a field (clickable header to sort,
@@ -41,8 +41,8 @@ Build the filtering, sorting and table ourselves, split into reusable layers:
 - **Explicit defaults**: each view has a complete default `ListQuery` (`VocabularyQueries`), used when nothing is saved
   and offered by "Reset to default". An empty sort means original order and is saved like any other choice, so a user can turn the default sort
   off and it stays off; there is no hidden "null means default".
-  - Table: no filter, sorted by word A–Z.
-  - Training: correct < 5 (words not yet learned), sorted by last answered ascending (never answered or answered
+  - Table: no filter, learned words first, then by word A–Z.
+  - Training: learned is no, sorted by last answered ascending (never answered or answered
     longest ago first), then complexity ascending (easiest first).
 - **Stable persisted format**: operators and sort directions have explicit `@SerialName`s, and field ids are part of
   the saved format, so renaming Kotlin code doesn't break saved queries. A test pins the JSON.
